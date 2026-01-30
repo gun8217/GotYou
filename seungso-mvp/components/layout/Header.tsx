@@ -1,5 +1,4 @@
 "use client";
-import Background from "@/components/layout/Background";
 import SideMenu from "@/components/layout/SideMenu";
 import { MenuItem } from "@/lib/menu";
 import { supabase } from "@/lib/supabase/client";
@@ -66,7 +65,6 @@ export default function Header({ menu }: { menu: MenuItem[] }) {
 
   return (
     <>
-      <Background />
       <header>
         <nav aria-label="상단 주요 메뉴">
           <Link href="/" className="logo">

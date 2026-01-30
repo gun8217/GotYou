@@ -2,7 +2,7 @@
 
 import { supabase } from "@/lib/supabase/client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react"; // 1. Suspense 추가
+import { Suspense, useState } from "react";
 
 // 실제 로그인 폼 로직을 별도 컴포넌트로 분리
 function LoginForm() {

@@ -1,0 +1,31 @@
+name: seungso
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pandas
+  - numpy
+  - scikit-learn
+  - pip:
+      # API & 서버
+      - fastapi
+      - uvicorn[standard]
+      - pydantic-settings
+
+      # DB & 인프라 (Supabase 연동)
+      - supabase
+      - python-dotenv
+
+      # 데이터 추출 & 정제 (판결문 파싱용)
+      - pymupdf
+      - konlpy
+
+      # AI/ML & 강화학습 (RL 전략 고도화용)
+      - torch
+      - stable-baselines3[extra]
+      - gymnasium
+
+      # HTTP 요청 (외부 법령 API 등 호출용)
+      - httpx

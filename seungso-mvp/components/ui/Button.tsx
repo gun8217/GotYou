@@ -3,7 +3,7 @@ import styles from "./Button.module.scss";
 type ButtonProps = {
   label: string;
   onClick?: () => void;
-  type?: "default" | "primary" | "secondary";
+  type?: "default" | "primary" | "secondary" | "animate";
 };
 
 export default function Button({

@@ -6,6 +6,9 @@ body {
 
 header {
   box-shadow: $shadow-white-lg;
+  inset: 0;
+  background: linear-gradient(135deg, #1e4db3 50%, #4ba3f7 90%, #3fcabc 100%);
+  animation: gradientMove 3s ease infinite;
   nav {
     display: flex;
     justify-content: space-between;
@@ -76,4 +79,25 @@ nav.sideMenu {
   border-left: $color-border-default 1px solid;
   background: #fff;
   box-shadow: $shadow-sm;
+}
+
+footer {
+  height: 30px;
+  font-size: $font-size-xs;
+  line-height: 30px;
+  color: $color-gray-500;
+  font-weight: $font-weight-thin;
+  text-align: center;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
