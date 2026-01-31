@@ -121,7 +121,8 @@ section {
 
 /* 4. Base line-height */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -171,19 +172,6 @@ svg {
 }
 
 /* 10. Form elements */
-button,
-input,
-select,
-textarea {
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
 button {
   cursor: pointer;
 }
@@ -193,8 +181,8 @@ button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
-  appearance: none; /* standard */
-  -webkit-appearance: none; /* Safari */
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 /* input search */

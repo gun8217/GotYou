@@ -16,39 +16,19 @@ header {
     .logo {
       display: flex;
       align-items: center;
-      gap: $spacing-1;
+      gap: $spacing-2;
       font-size: $font-size-md;
-      letter-spacing: $font-spacing-xl;
+      letter-spacing: $font-spacing-2xl;
       color: $color-white;
       font-weight: $font-weight-medium;
       text-shadow: $shadow-sm;
       span {
         overflow: hidden;
-        border-radius: 50%;
+        border-radius: $radius-full;
         svg {
-          border-radius: 50%;
+          border-radius: $radius-full;
         }
       }
-      // span {
-      //   overflow: hidden;
-      //   display: inline-block;
-      //   margin-right: $spacing-1;
-      //   padding: $spacing-1;
-      //   border-radius: $radius-full;
-      //   background: linear-gradient(
-      //     45deg,
-      //     rgba(255, 255, 255, 0.8) 0,
-      //     rgba(255, 255, 255, 0.7) 15%,
-      //     rgba(255, 255, 255, 1) 50%,
-      //     rgba(255, 255, 255, 0.7) 85%,
-      //     rgba(255, 255, 255, 0.8) 100%
-      //   );
-      //   box-shadow: $shadow-sm;
-      //   img {
-      //     width: 24px;
-      //     height: 24px;
-      //   }
-      // }
     }
     .menuGroup {
       display: flex;
@@ -79,6 +59,13 @@ nav.sideMenu {
   border-left: $color-border-default 1px solid;
   background: #fff;
   box-shadow: $shadow-sm;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: calc(100vh - 52px - 30px);
 }
 
 footer {

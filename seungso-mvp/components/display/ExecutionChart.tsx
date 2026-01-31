@@ -45,26 +45,20 @@ export default function ExecutionChart({ labels, counts }: ChartProps) {
     const ctx = chartRef.current.getContext("2d");
     if (!ctx) return;
 
-    const floatingData: [number, number][] = counts.map((val) => [10000, val]);
-
-    const config: ChartConfiguration<"bar", [number, number][]> = {
+    const config: ChartConfiguration<"bar", number[]> = {
       type: "bar",
       data: {
         labels: abbreviatedLabels,
         datasets: [
           {
             label: "연간 집행 건수",
-            data: floatingData,
+            data: counts,
+            base: 10000,
             backgroundColor: primary,
             borderColor: primary,
             borderWidth: 1,
-            borderRadius: {
-              topLeft: 4,
-              topRight: 4,
-              bottomLeft: 0,
-              bottomRight: 0,
-            },
-            borderSkipped: "bottom",
+            borderRadius: { topLeft: 4, topRight: 4 },
+            barThickness: 18,
           },
         ],
       },
@@ -88,6 +82,7 @@ export default function ExecutionChart({ labels, counts }: ChartProps) {
             },
           },
           y: {
+            beginAtZero: false,
             min: 10000,
             grid: {
               color: "rgba(255,255,255,0.2)",

@@ -1,10 +1,6 @@
 @use "./styles/variables" as *;
 
 .pageMain {
-  display: flex;
-  flex-direction: column;
-  min-height: calc(100vh - 52px - 30px);
-
   .titBox {
     padding: $spacing-16 0;
     text-align: center;
@@ -31,16 +27,19 @@
   }
 
   .dataCon {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
     width: 100%;
     padding: $spacing-16 0;
     border: $color-border-muted 1px solid;
-    border-radius: $radius-sm;
     box-shadow: $shadow-sm;
     background: linear-gradient(135deg, #3fcabc 0, #4ba3f7 10%, #1e4db3 50%);
     animation: gradientMove 3s ease infinite;
+    & > div {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      max-width: 750px;
+      margin: 0 auto;
+    }
     .dataTxt {
       margin-top: -35px;
       b {
@@ -61,7 +60,7 @@
     }
     .graph {
       position: relative;
-      width: 260px;
+      width: 245px;
       span {
         font-size: 11px;
         color: rgba(255, 255, 255, 0.7);
@@ -73,6 +72,8 @@
     padding: $spacing-16 0;
     & > ul {
       display: flex;
+      max-width: 750px;
+      margin: 0 auto;
       & > li {
         position: relative;
         display: flex;

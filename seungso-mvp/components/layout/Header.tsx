@@ -52,14 +52,16 @@ export default function Header({ menu }: { menu: MenuItem[] }) {
   if (loading)
     return (
       <>
-        <nav aria-label="상단 주요 메뉴">
-          <Link href="/" className="logo">
-            <span>
-              <Image src={logo} alt="승소환전소 로고" />
-            </span>
-            <b>승소환전소</b>
-          </Link>
-        </nav>
+        <header>
+          <nav aria-label="상단 주요 메뉴">
+            <Link href="/" className="logo">
+              <span>
+                <Image src={logo} alt="승소환전소 로고" />
+              </span>
+              <b>승소환전소</b>
+            </Link>
+          </nav>
+        </header>
       </>
     );
 
