@@ -3,33 +3,41 @@
    ======================================== */
 
 /* ----------------------------------------
+   00. layout
+   ---------------------------------------- */
+
+$min-width: 750px;
+$inner-width: 1024px;
+$inner-margin-x: auto;
+
+/* ----------------------------------------
    1. Colors
    ---------------------------------------- */
 
 /* Brand */
-$color-primary: #1e3a8a; // navy blue-900
-$color-primary-hover: #1d4ed8; // blue-700
-$color-primary-active: #2563eb; // blue-600
+$color-primary: #1e40af; // blue-800
+$color-primary-hover: #2563eb; // blue-600
+$color-primary-active: #3b82f6; // blue-500
 
 /* Neutral */
-$color-black: #111827;
-$color-gray-900: #1f2937;
-$color-gray-700: #374151;
-$color-gray-500: #6b7280;
-$color-gray-300: #d1d5db;
-$color-gray-100: #f3f4f6;
+$color-black: #0f172a; // slate-900
+$color-gray-900: #1e293b; // slate-800
+$color-gray-700: #334155; // slate-700
+$color-gray-500: #64748b; // slate-500
+$color-gray-300: #cbd5e1; // slate-300
+$color-gray-100: #f1f5f9; // slate-100
 $color-white: #fff;
 
 /* Semantic */
-$color-success: #22c55e; // green-500
-$color-warning: #facc15; // yellow-400
+$color-success: #10b981; // green-500
+$color-warning: #fbbf24; // yellow-400
 $color-error: #ef4444; // red-500
 $color-info: #0ea5e9; // sky-500
 
 /* Background */
-$color-bg-body: #f8f9fa;
+$color-bg-body: #f8fafc; // slate-50
 $color-bg-card: #fff;
-$color-bg-muted: #f3f4f6;
+$color-bg-muted: #f1f5f9; // slate-100
 
 /* Border */
 $color-border-default: $color-gray-300;

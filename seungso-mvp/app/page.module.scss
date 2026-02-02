@@ -1,4 +1,4 @@
-@use "./styles/variables" as *;
+@use "@/app/styles/variables" as *;
 
 .pageMain {
   .titBox {
@@ -37,8 +37,8 @@
       display: flex;
       justify-content: space-evenly;
       align-items: center;
-      max-width: 750px;
-      margin: 0 auto;
+      max-width: $inner-width;
+      margin: 0 $inner-margin-x;
     }
     .dataTxt {
       margin-top: -35px;
@@ -72,8 +72,8 @@
     padding: $spacing-16 0;
     & > ul {
       display: flex;
-      max-width: 750px;
-      margin: 0 auto;
+      max-width: $inner-width;
+      margin: 0 $inner-margin-x;
       & > li {
         position: relative;
         display: flex;

@@ -8,11 +8,11 @@ type InputProps = {
     | "email"
     | "password"
     | "number"
-    | "textarea"
     | "date"
     | "time"
     | "range"
-    | "file";
+    | "file"
+    | "textarea";
   value?: string;
   placeholder?: string;
   onChange: (

@@ -9,7 +9,7 @@ type TooltipProps = {
 
 export default function Tooltip({ text, children }: TooltipProps) {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.tooltipWrap}>
       {children}
       <span className={styles.tooltip}>{text}</span>
     </div>

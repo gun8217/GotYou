@@ -1,8 +1,26 @@
-/* Card.module.scss */
+@use "@/app/styles/variables" as *;
+
 .card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: $spacing-4;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-md;
+  background: $color-bg-card;
+  box-shadow: $shadow-sm;
+  .header {
+    padding-bottom: $spacing-3;
+    font-size: $font-size-md;
+    font-weight: $font-weight-semibold;
+    color: $color-gray-700;
+    border-bottom: 1px solid $color-border-default;
+  }
+  .body {
+    padding-top: $spacing-3;
+    font-size: $font-size-sm;
+    color: $color-gray-700;
+    line-height: $line-height-base;
+  }
 }

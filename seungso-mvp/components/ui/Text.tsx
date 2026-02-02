@@ -5,7 +5,7 @@ type TextProps = {
   children: React.ReactNode;
   size?: "sm" | "md" | "lg";
   weight?: "normal" | "bold" | "light";
-  color?: "default" | "primary" | "secondary" | "danger";
+  color?: "default" | "primary" | "secondary" | "info" | "danger";
   as?: "p" | "span" | "div";
 };
 

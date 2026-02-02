@@ -1,0 +1,47 @@
+@use "@/app/styles/variables" as *;
+
+.tabWrap {
+  width: 100%;
+  .tabList {
+    margin-bottom: $spacing-4;
+    border-bottom: 1px solid $color-border-default;
+    background: $color-white;
+    & > div {
+      position: relative;
+      display: flex;
+      gap: $spacing-2;
+      max-width: $inner-width;
+      margin: 0 $inner-margin-x;
+    }
+    .tab {
+      position: relative;
+      background: none;
+      border: none;
+      padding: $spacing-2 $spacing-4;
+      font-size: $font-size-md;
+      font-family: $font-family-base;
+      font-weight: $font-weight-medium;
+      color: $color-gray-700;
+      cursor: pointer;
+      transition: color $transition-base;
+      &:hover {
+        color: $color-primary-hover;
+      }
+      &.active {
+        color: $color-primary;
+        font-weight: $font-weight-semibold;
+      }
+    }
+    .indicator {
+      position: absolute;
+      bottom: -1px;
+      height: 2px;
+      background-color: $color-primary;
+      transition: all $transition-base;
+    }
+    & + div {
+      max-width: $inner-width;
+      margin: 0 $inner-margin-x;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+@use "@/app/styles/variables" as *;
+
+.flex {
+  display: flex;
+  .flex1 {
+    flex: 1;
+  }
+}

@@ -3,10 +3,13 @@
 import { supabase } from "@/lib/supabase/client";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "./page.module.scss";
 
 export default function SignUpForm() {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -17,11 +20,22 @@ export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  // ✅ 비밀번호 검증 함수: 6자 이상 + 특수문자 포함
+  const isValidPassword = (pw: string) => {
+    const regex = /^(?=.*[!@#$%^&*]).{6,}$/;
+    return regex.test(pw);
+  };
+
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!email || !password || !confirmPassword) {
       setMessage("모든 필드를 입력해주세요.");
+      return;
+    }
+
+    if (!isValidPassword(password)) {
+      setMessage("비밀번호는 특수문자를 포함하여 6자 이상이어야 합니다.");
       return;
     }
 
@@ -47,12 +61,22 @@ export default function SignUpForm() {
       console.log("회원가입 응답:", { data, error });
 
       if (error) {
-        setMessage(`회원가입 실패: ${error.message}`);
+        if (error.message.includes("already registered")) {
+          setMessage("이미 가입된 이메일입니다.");
+        } else if (error.message.includes("invalid")) {
+          setMessage("이메일 형식이 올바르지 않습니다.");
+        } else {
+          setMessage("회원가입에 실패했습니다.");
+        }
         return;
       }
 
-      if (data?.user) {
-        setMessage(`회원가입 성공! 사용자 ID: ${data.user.id}`);
+      if (data?.user && !data.session) {
+        alert("회원가입 완료! 이메일 인증 후 로그인해주세요.");
+        router.push("/login");
+      } else if (data?.user) {
+        alert("회원가입 완료!");
+        router.push("/login");
       } else {
         setMessage("회원가입은 되었지만 사용자 정보를 불러오지 못했습니다.");
       }
@@ -82,11 +106,10 @@ export default function SignUpForm() {
       <div className="password-wrapper">
         <input
           type={showPassword ? "text" : "password"}
-          placeholder="비밀번호"
+          placeholder="비밀번호 (특수문자 포함 6자 이상)"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          minLength={6}
           className={`password-input ${showPassword ? "isShow" : ""}`}
         />
         <span
@@ -105,7 +128,6 @@ export default function SignUpForm() {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
-          minLength={6}
           className={`password-input ${showConfirmPassword ? "isShow" : ""}`}
         />
         <span
@@ -115,6 +137,11 @@ export default function SignUpForm() {
           <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
         </span>
       </div>
+
+      {/* 안내 문구 */}
+      <p className="password-guide">
+        비밀번호는 <strong>특수문자를 포함하여 6자 이상</strong>이어야 합니다.
+      </p>
 
       {/* 약관/개인정보 동의 */}
       <div className="checkbox-container">

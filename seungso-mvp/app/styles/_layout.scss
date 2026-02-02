@@ -1,7 +1,8 @@
-@use "./variables" as *;
+@use "@/app/styles/variables" as *;
 
 body {
   background: $color-bg-body;
+  min-width: $min-width;
 }
 
 header {
@@ -66,6 +67,7 @@ main {
   flex-direction: column;
   width: 100%;
   min-height: calc(100vh - 52px - 30px);
+  padding-bottom: $spacing-10;
 }
 
 footer {

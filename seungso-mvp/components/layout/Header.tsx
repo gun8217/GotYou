@@ -3,13 +3,6 @@ import SideMenu from "@/components/layout/SideMenu";
 import { MenuItem } from "@/lib/menu";
 import { supabase } from "@/lib/supabase/client";
 import logo from "@/public/images/logo.svg";
-import {
-  faArrowRightFromBracket,
-  faBars,
-  faUser,
-  faUserCheck,
-  faUserPlus,
-} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { User } from "@supabase/supabase-js";
 import Image from "next/image";
@@ -51,18 +44,16 @@ export default function Header({ menu }: { menu: MenuItem[] }) {
 
   if (loading)
     return (
-      <>
-        <header>
-          <nav aria-label="상단 주요 메뉴">
-            <Link href="/" className="logo">
-              <span>
-                <Image src={logo} alt="승소환전소 로고" />
-              </span>
-              <b>승소환전소</b>
-            </Link>
-          </nav>
-        </header>
-      </>
+      <header>
+        <nav aria-label="상단 주요 메뉴">
+          <Link href="/" className="logo">
+            <span>
+              <Image src={logo} alt="승소환전소 로고" />
+            </span>
+            <b>승소환전소</b>
+          </Link>
+        </nav>
+      </header>
     );
 
   return (
@@ -78,22 +69,22 @@ export default function Header({ menu }: { menu: MenuItem[] }) {
           <div className="menuGroup">
             {user && (
               <button onClick={() => setIsMenuOpen(true)}>
-                <FontAwesomeIcon icon={faBars} size="lg" aria-label="메뉴" />
+                <FontAwesomeIcon icon="bars" size="lg" aria-label="메뉴" />
               </button>
             )}
 
             {user ? (
               <>
-                <Link href="/join">
+                <Link href="/signup">
                   <FontAwesomeIcon
-                    icon={faUser}
+                    icon="user"
                     size="lg"
                     aria-label="회원정보"
                   />
                 </Link>
                 <button onClick={handleLogout}>
                   <FontAwesomeIcon
-                    icon={faArrowRightFromBracket}
+                    icon="arrow-right-from-bracket"
                     size="lg"
                     aria-label="로그아웃"
                   />
@@ -102,10 +93,10 @@ export default function Header({ menu }: { menu: MenuItem[] }) {
             ) : (
               <>
                 <Link href="/login">
-                  <FontAwesomeIcon icon={faUserCheck} aria-label="로그인" />
+                  <FontAwesomeIcon icon="user-check" aria-label="로그인" />
                 </Link>
-                <Link href="/join">
-                  <FontAwesomeIcon icon={faUserPlus} aria-label="회원가입" />
+                <Link href="/signup">
+                  <FontAwesomeIcon icon="user-plus" aria-label="회원가입" />
                 </Link>
               </>
             )}

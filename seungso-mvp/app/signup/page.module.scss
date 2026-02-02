@@ -1,0 +1,152 @@
+@use "@/app/styles/variables" as *;
+
+.signupForm {
+  max-width: 420px;
+  margin: $spacing-16 auto;
+  padding: $spacing-8;
+  background-color: $color-bg-card;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+
+  h2 {
+    text-align: center;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-6;
+  }
+}
+
+/* =========================
+   Inputs
+   ========================= */
+
+.signup-input,
+.password-input {
+  width: 100%;
+  padding: $spacing-3;
+  font-size: $font-size-md;
+  border: 1px solid $color-border-default;
+  border-radius: $radius-sm;
+  background-color: $color-bg-card;
+  transition:
+    border-color $transition-fast,
+    box-shadow $transition-fast;
+
+  &::placeholder {
+    color: $color-gray-500;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+    box-shadow: 0 0 0 2px rgba(30, 64, 175, 0.15);
+  }
+}
+
+/* =========================
+   Password field
+   ========================= */
+
+.password-wrapper {
+  position: relative;
+  margin-top: $spacing-4;
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: $spacing-3;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: $color-gray-500;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+/* =========================
+   Guide text
+   ========================= */
+
+.password-guide {
+  margin-top: $spacing-2;
+  font-size: $font-size-sm;
+  color: $color-gray-500;
+}
+
+/* =========================
+   Checkbox
+   ========================= */
+
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+  margin-top: $spacing-6;
+  font-size: $font-size-sm;
+  color: $color-gray-700;
+
+  input {
+    margin-right: $spacing-2;
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+
+/* =========================
+   Button
+   ========================= */
+
+.signup-button {
+  width: 100%;
+  margin-top: $spacing-6;
+  padding: $spacing-3;
+  border-radius: $radius-md;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  border: none;
+  cursor: pointer;
+  background-color: $color-primary;
+  color: $color-white;
+  transition:
+    background-color $transition-fast,
+    box-shadow $transition-fast;
+
+  &:hover {
+    background-color: $color-primary-hover;
+  }
+
+  &:active {
+    background-color: $color-primary-active;
+  }
+
+  &:disabled {
+    background-color: $color-gray-300;
+    cursor: not-allowed;
+  }
+}
+
+/* =========================
+   Message
+   ========================= */
+
+.signup-message {
+  margin-top: $spacing-4;
+  font-size: $font-size-sm;
+  text-align: center;
+
+  &.error {
+    color: $color-error;
+  }
+
+  &.success {
+    color: $color-success;
+  }
+}

@@ -2,6 +2,7 @@ import "@/app/globals.scss";
 import FontAwesomeConfig from "@/components/layout/FontAwesomeConfig";
 import Header from "@/components/layout/Header";
 import ThemeWrapper from "@/components/layout/ThemeWrapper";
+import { ToastProvider } from "@/components/ui/ToastProvider";
 import { getMenuItems } from "@/lib/menu";
 
 export const metadata = {
@@ -29,9 +30,11 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeWrapper>
-          <Header menu={menu} />
-          <main>{children}</main>
-          <footer>본 사이트 이미지는 AI로 생성되었습니다.</footer>
+          <ToastProvider>
+            <Header menu={menu} />
+            <main>{children}</main>
+            <footer>본 사이트 이미지는 AI로 생성되었습니다.</footer>
+          </ToastProvider>
         </ThemeWrapper>
       </body>
     </html>
