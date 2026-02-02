@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import styles from "./Input.module.scss";
 
@@ -19,6 +20,7 @@ type InputProps = {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   disabled?: boolean;
+  required?: boolean;
   error?: string;
   rows?: number;
   min?: number;
@@ -33,12 +35,21 @@ export default function Input({
   placeholder,
   onChange,
   disabled = false,
+  required = false,
   error,
   rows = 4,
+  min,
+  max,
+  step,
 }: InputProps) {
   return (
     <div className={styles.inputWrapper}>
-      {label && <label className={styles.label}>{label}</label>}
+      {label && (
+        <label className={styles.label}>
+          {label}
+          {required && <span className={styles.required}> *</span>}
+        </label>
+      )}
 
       {type === "textarea" ? (
         <textarea
@@ -46,6 +57,7 @@ export default function Input({
           placeholder={placeholder}
           onChange={onChange}
           disabled={disabled}
+          required={required}
           rows={rows}
           className={`${styles.textarea} ${error ? styles.error : ""}`}
         />
@@ -56,6 +68,10 @@ export default function Input({
           placeholder={placeholder}
           onChange={onChange}
           disabled={disabled}
+          required={required}
+          min={min}
+          max={max}
+          step={step}
           className={`${styles.input} ${error ? styles.error : ""}`}
         />
       )}

@@ -1,13 +1,18 @@
 import React from "react";
 import styles from "./Text.module.scss";
 
-type TextProps = {
+type BaseProps = {
   children: React.ReactNode;
   size?: "sm" | "md" | "lg";
   weight?: "normal" | "bold" | "light";
-  color?: "default" | "primary" | "secondary" | "info" | "danger";
-  as?: "p" | "span" | "div";
+  color?: "default" | "primary" | "secondary" | "info" | "error";
+  as?: "p" | "span" | "div" | "button";
 };
+
+type TextProps = BaseProps &
+  React.HTMLAttributes<HTMLElement> & {
+    type?: "button" | "submit" | "reset";
+  };
 
 export default function Text({
   children,
@@ -15,12 +20,14 @@ export default function Text({
   weight = "normal",
   color = "default",
   as = "p",
+  ...rest
 }: TextProps) {
-  const Tag: React.ElementType = as; // React.ElementType로 선언
+  const Tag = as as React.ElementType;
 
   return (
     <Tag
       className={`${styles.text} ${styles[size]} ${styles[weight]} ${styles[color]}`}
+      {...rest}
     >
       {children}
     </Tag>

@@ -1,9 +1,10 @@
 "use client";
 import SideMenu from "@/components/layout/SideMenu";
+import Button from "@/components/ui/Button";
+import Icon from "@/components/ui/Icon";
 import { MenuItem } from "@/lib/menu";
 import { supabase } from "@/lib/supabase/client";
 import logo from "@/public/images/logo.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { User } from "@supabase/supabase-js";
 import Image from "next/image";
 import Link from "next/link";
@@ -68,35 +69,33 @@ export default function Header({ menu }: { menu: MenuItem[] }) {
           </Link>
           <div className="menuGroup">
             {user && (
-              <button onClick={() => setIsMenuOpen(true)}>
-                <FontAwesomeIcon icon="bars" size="lg" aria-label="메뉴" />
-              </button>
+              <Button styleType="icon" onClick={() => setIsMenuOpen(true)}>
+                <Icon icon="bars" size="lg" aria-label="메뉴" />
+              </Button>
             )}
 
             {user ? (
               <>
-                <Link href="/signup">
-                  <FontAwesomeIcon
-                    icon="user"
-                    size="lg"
-                    aria-label="회원정보"
-                  />
+                <Link href="/member/signup">
+                  <Icon icon="user" size="lg" aria-label="회원정보" />
                 </Link>
-                <button onClick={handleLogout}>
-                  <FontAwesomeIcon
+                <Button styleType="icon" onClick={() => handleLogout()}>
+                  <Icon
                     icon="arrow-right-from-bracket"
                     size="lg"
                     aria-label="로그아웃"
                   />
-                </button>
+                </Button>
               </>
             ) : (
               <>
-                <Link href="/login">
-                  <FontAwesomeIcon icon="user-check" aria-label="로그인" />
+                <Link href="/member/login">
+                  <Icon icon="user-check" size="lg" aria-label="로그인" />
+                  로그인
                 </Link>
-                <Link href="/signup">
-                  <FontAwesomeIcon icon="user-plus" aria-label="회원가입" />
+                <Link href="/member/signup">
+                  <Icon icon="user-plus" size="lg" aria-label="회원가입" />
+                  회원가입
                 </Link>
               </>
             )}

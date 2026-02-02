@@ -6,6 +6,7 @@ type CheckboxProps = {
   checked: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
+  readOnly?: boolean;
 };
 
 export default function Checkbox({
@@ -13,14 +14,16 @@ export default function Checkbox({
   checked,
   onChange,
   disabled = false,
+  readOnly = false,
 }: CheckboxProps) {
   return (
     <label className={styles.wrapper}>
       <input
         type="checkbox"
         checked={checked}
-        onChange={onChange}
+        onChange={readOnly ? undefined : onChange}
         disabled={disabled}
+        readOnly={readOnly}
         className={styles.checkbox}
       />
       <span className={styles.label}>{label}</span>

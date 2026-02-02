@@ -33,7 +33,7 @@ export default function RootLayout({
           <ToastProvider>
             <Header menu={menu} />
             <main>{children}</main>
-            <footer>본 사이트 이미지는 AI로 생성되었습니다.</footer>
+            <footer>Copyright ⓒ 2026 승소환전소.</footer>
           </ToastProvider>
         </ThemeWrapper>
       </body>

@@ -6,14 +6,21 @@ body {
 }
 
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
   box-shadow: $shadow-white-lg;
   inset: 0;
-  background: linear-gradient(135deg, #1e4db3 50%, #4ba3f7 90%, #3fcabc 100%);
-  animation: gradientMove 3s ease infinite;
+  background: #000b1a;
+  // background: linear-gradient(135deg, #1e4db3 50%, #4ba3f7 90%, #3fcabc 100%);
+  // animation: gradientMove 3s ease infinite;
+  z-index: $z-index-fixed;
   nav {
     display: flex;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: $spacing-2 $spacing-5;
     .logo {
       display: flex;
       align-items: center;
@@ -39,9 +46,12 @@ header {
       & > * {
         display: inline-block;
         padding: $spacing-1 $spacing-2;
+        color: $color-white;
+        font-weight: $font-weight-semibold;
         svg {
-          color: #fff;
+          color: $color-white;
           transition: all 0.3s ease-in-out;
+          margin-right: $spacing-2;
         }
         &:hover svg {
           transform: scale(1.2);
@@ -66,17 +76,18 @@ main {
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: calc(100vh - 52px - 30px);
-  padding-bottom: $spacing-10;
+  min-height: calc(100vh - 30px);
+  padding: 48px 0 $spacing-10;
 }
 
 footer {
   height: 30px;
   font-size: $font-size-xs;
   line-height: 30px;
-  color: $color-gray-500;
+  color: rgba(255, 255, 255, 0.5);
   font-weight: $font-weight-thin;
   text-align: center;
+  background: #000b1a;
 }
 
 @keyframes gradientMove {

@@ -2,6 +2,7 @@
 
 // import Avatar from "@/components/ui/Avatar";
 import Badge from "@/components/ui/Badge";
+import Button from "@/components/ui/Button";
 import Flex from "@/components/ui/Flex";
 import Icon from "@/components/ui/Icon";
 import Spinner from "@/components/ui/Spinner";
@@ -41,7 +42,7 @@ export default function Guide() {
         <Text color="primary">color=&quot;primary&quot;</Text>
         <Text color="secondary">color=&quot;secondary&quot;</Text>
         <Text color="info">color=&quot;info&quot;</Text>
-        <Text color="danger">color=&quot;danger&quot;</Text>
+        <Text color="error">color=&quot;error&quot;</Text>
       </Flex>
 
       <Title text="Badge" level={5} />
@@ -49,10 +50,38 @@ export default function Guide() {
       <Badge text="Success" color="success" />
       <Badge text="Error" color="error" />
 
+      <Title text="Button" level={5} />
+      <Flex gap={8}>
+        <Button>Default</Button>
+        <Button styleType="primary">Primary</Button>
+        <Button styleType="secondary">Secondary</Button>
+        <Button styleType="animate">Animate</Button>
+        <Button styleType="error">Error</Button>
+        <Button type="submit">Submit</Button>
+        <Button type="reset">Reset</Button>
+        <Button disabled>Disabled</Button>
+        <Button onClick={() => alert("Clicked!")}>Click Me</Button>
+      </Flex>
+      <Flex style={{ marginTop: "8px" }}>
+        <Button fullWidth>Full Width</Button>
+      </Flex>
+
       <Title text="Icon" level={5} />
-      <Icon icon="coffee" size="2x" color="#0070f3" />
-      <Icon icon="user" size="2x" color="#333" />
-      <Icon icon="check-circle" size="2x" color="green" />
+      <Flex gap={8} wrap="wrap">
+        <Icon icon="arrow-right-from-bracket" />
+        <Icon icon="bars" />
+        <Icon icon="check-circle" />
+        <Icon icon="coffee" />
+        <Icon icon="user" />
+        <Icon icon="user-check" />
+        <Icon icon="user-plus" />
+        <Icon icon="times" />
+        <Icon icon="arrow-right" />
+        <Icon icon="chevron-right" />
+        <Icon icon="eye" />
+        <Icon icon="eye-slash" />
+        <Icon icon="compass" />
+      </Flex>
 
       <Title text="Spinner" level={5} />
       <Spinner />

@@ -3,12 +3,20 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./Tabs.module.scss";
 
 type Tab = { label: string; content: React.ReactNode };
-type TabsProps = { tabs: Tab[] };
 
-export default function Tabs({ tabs }: TabsProps) {
-  const [active, setActive] = useState(0);
+type TabsProps = {
+  tabs: Tab[];
+  initialIndex?: number; // ✅ 추가
+};
+
+export default function Tabs({ tabs, initialIndex = 0 }: TabsProps) {
+  const [active, setActive] = useState(initialIndex);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+
+  useEffect(() => {
+    setActive(initialIndex);
+  }, [initialIndex]);
 
   useEffect(() => {
     const currentTab = tabRefs.current[active];
@@ -36,6 +44,7 @@ export default function Tabs({ tabs }: TabsProps) {
               {tab.label}
             </button>
           ))}
+
           <span
             className={styles.indicator}
             style={{ left: indicatorStyle.left, width: indicatorStyle.width }}

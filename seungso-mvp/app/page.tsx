@@ -1,73 +1,84 @@
-import ExecutionChart from "@/components/display/ExecutionChart";
-import Button from "@/components/ui/Button";
-import { fetchYearlyStats } from "@/types/stats";
-import styles from "./page.module.scss";
+"use client";
 
-export default async function HomePage() {
-  const { labels, counts } = await fetchYearlyStats();
+import Button from "@/components/ui/Button";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import styles from "./HeroSection.module.scss";
+
+export default function HeroSection() {
+  const [phase, setPhase] = useState<"falling" | "rippling" | "finished">(
+    "falling",
+  );
+  // 물방울 애니메이션만 반복시키기 위한 trigger 상태
+  const [dropKey, setDropKey] = useState(0);
+
+  // 5초마다 dropKey를 변경하여 애니메이션 재실행
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDropKey((prev) => prev + 1);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <>
-      <main className={styles.pageMain}>
-        <div className={styles.titBox}>
-          <strong>
-            소액 채권자의 <span>합리적 선택</span>을 돕는 <span>나침반</span>
-          </strong>
-          <p>
-            종이 한 장으로 남은 승소 판결문, 소멸시효가 지나기 전에 데이터로
-            가치를 증명하세요.
-          </p>
-          <Button type="animate" label="판결문 등록하기" />
-        </div>
+    <section className={styles.hero}>
+      <div className={styles.canvasContainer}>
+        <AnimatePresence mode="wait">
+          {/* 10초마다 dropKey가 변하면 이 내부의 모든 것이 새로 시작됩니다 */}
+          <motion.div
+            key={dropKey}
+            style={{ width: "100%", height: "100%", position: "relative" }}
+          >
+            {/* 1. 떨어지는 판결문 (물방울) */}
+            <motion.div
+              className={styles.drop}
+              initial={{ y: -100, x: "50%", scale: 1.2, opacity: 1 }}
+              animate={{ y: "70vh", scale: 0.5, opacity: 0.8 }}
+              transition={{ duration: 1.5, ease: [0.13, 0, 0.13, 1] }}
+              onAnimationComplete={() => {
+                // 첫 실행 시에만 전체 페이즈를 전환
+                if (phase === "falling") setPhase("rippling");
+              }}
+            />
 
-        {/* 데이터 검증 영역 */}
-        <div className={styles.dataCon}>
-          <div>
-            <div className={styles.dataTxt}>
-              <b>
-                2015년 이후 집행 건수 <span>65% 감소</span>
-              </b>
-              <p>
-                실제 판결 대비 집행 비율은 매년 감소하고 있습니다.
-                <br />
-                우리는 이 격차를 데이터로 분석합니다.
-              </p>
-            </div>
-            <div className={styles.graph}>
-              <div>
-                <ExecutionChart labels={labels} counts={counts} />
-              </div>
-              <span>*출처: 사법연감(&rsquo;14-&rsquo;19)</span>
-            </div>
-          </div>
-        </div>
+            {/* 2. 퍼지는 물결 */}
+            <motion.div
+              className={styles.ripple}
+              initial={{ scale: 0, opacity: 0.8, x: "-50%", y: "-50%" }}
+              animate={{ scale: 4, opacity: 0 }}
+              transition={{ duration: 2.5, delay: 1.5, ease: "easeOut" }} // 낙하 후 바로 시작되도록 delay 추가
+              onAnimationComplete={() => {
+                if (phase === "rippling") setPhase("finished");
+              }}
+              style={{ left: "50%", top: "70vh", position: "absolute" }}
+            />
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
-        <div className={styles.cardList}>
-          <ul>
-            <li className={styles.item1}>
-              <b>판결문 데이터화</b>
-              <ul>
-                <li>종이 판결문 등록</li>
-                <li>소멸시효·집행 가능성 자동 분석</li>
-              </ul>
-            </li>
-            <li className={styles.item2}>
-              <b>유사 사례 찾기</b>
-              <ul>
-                <li>등록된 채권 데이터 비교</li>
-                <li>다른 채권자의 회수 절차 확인</li>
-              </ul>
-            </li>
-            <li className={styles.item3}>
-              <b>채권 지도 만들기</b>
-              <ul>
-                <li>정보 공유로 은닉 자산 탐색</li>
-                <li>데이터로 회수 확률 강화</li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </main>
-    </>
+      {/* 3. 메인 텍스트 (한 번 나타나면 유지됨) */}
+      <motion.div
+        className={styles.introSection}
+        initial={{ opacity: 0, y: 20 }}
+        animate={phase !== "falling" ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 1.2, delay: 0.2 }}
+      >
+        <p className={styles.introText}>
+          승소판결문이 더 이상 종이조각이 되지 않도록
+        </p>
+        <p className={styles.introText}>
+          법적 권리를 실질적 삶의 권리로 연결합니다.
+        </p>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={phase === "finished" ? { opacity: 1 } : {}}
+          transition={{ delay: 0.5 }}
+        >
+          <Button className={styles.mainBtn}>나의 판결문 확인하기</Button>
+        </motion.div>
+      </motion.div>
+    </section>
   );
 }

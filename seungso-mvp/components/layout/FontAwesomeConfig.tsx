@@ -9,6 +9,9 @@ import {
   faCheckCircle,
   faChevronRight,
   faCoffee,
+  faCompass,
+  faEye,
+  faEyeSlash,
   faTimes,
   faUser,
   faUserCheck,
@@ -28,6 +31,9 @@ library.add(
   faTimes,
   faArrowRight,
   faChevronRight,
+  faEye,
+  faEyeSlash,
+  faCompass,
 );
 
 export default function FontAwesomeConfig() {
