@@ -3,9 +3,11 @@
 import Text from "@/components/ui/Text";
 import Title from "@/components/ui/Title";
 
+import styles from "../MemberCommon.module.scss";
+
 export default function PrivacyPage() {
   return (
-    <div>
+    <div className={styles.terms}>
       <Title level={2}>개인정보 수집 및 이용 안내</Title>
 
       <section>
@@ -27,8 +29,16 @@ export default function PrivacyPage() {
           <br />
           • 회원 식별 및 인증
           <br />
+          • 로그인 아이디로서의 계정 관리
+          <br />
           • 사건 정보 관리 및 서비스 제공
-          <br />• 서비스 개선 및 운영 관리
+          <br />
+          • 서비스 개선 및 운영 관리
+          <br />
+          <br />
+          이메일 주소는 본인 식별 및 로그인을 위한 아이디로 사용되며, 가입 시
+          입력한 이메일 주소를 분실하거나 기억하지 못하는 경우 플랫폼은 이를
+          별도로 안내하거나 확인해 드리지 않습니다.
         </Text>
       </section>
 

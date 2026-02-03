@@ -24,7 +24,9 @@ export default function Guide() {
       <Tooltip text="툴팁 메시지">마우스를 올려보세요</Tooltip>
 
       <Title text="Modal" level={5} />
-      <Button label="모달 열기" type="secondary" onClick={handleOpen} />
+      <Button styleType="secondary" onClick={handleOpen}>
+        모달 열기
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -41,18 +43,11 @@ export default function Guide() {
 
       <Title text="Toast" level={5} />
       <Flex gap={8}>
-        <Button
-          label="Toast success"
-          onClick={() => addToast("저장 완료!", "success")}
-        />
-        <Button
-          label="Toast error"
-          onClick={() => addToast("에러 발생!", "error")}
-        />
-        <Button
-          label="Toast info"
-          onClick={() => addToast("정보 알림!", "info")}
-        />
+        <Button onClick={() => addToast("저장 완료!", "success")}>
+          success
+        </Button>
+        <Button onClick={() => addToast("에러 발생!", "error")}>error</Button>
+        <Button onClick={() => addToast("정보 알림!", "info")}>info</Button>
       </Flex>
 
       <Title text="Tabs" level={5} />

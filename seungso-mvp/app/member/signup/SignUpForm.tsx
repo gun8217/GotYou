@@ -16,7 +16,7 @@ import Title from "@/components/ui/Title";
 import PrivacyPage from "@/app/member/terms/PrivacyPage";
 import TermsPage from "@/app/member/terms/TermsPage";
 
-import styles from "./SignUpForm.module.scss";
+import styles from "../MemberCommon.module.scss";
 
 export default function SignUpForm() {
   const router = useRouter();

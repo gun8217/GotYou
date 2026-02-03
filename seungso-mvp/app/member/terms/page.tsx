@@ -1,20 +1,10 @@
-"use client";
+import TermsTabs from "./TermsTabs";
 
-import Tabs from "@/components/ui/Tabs";
-import { useSearchParams } from "next/navigation";
-import PrivacyPage from "./PrivacyPage";
-import TermsPage from "./TermsPage";
+export const metadata = {
+  title: "약관 및 개인정보 처리방침",
+  description: "승소환전소의 약관 및 개인정보 처리방침 페이지입니다.",
+};
 
-export default function MemberTermsPage() {
-  const searchParams = useSearchParams();
-  const tab = searchParams.get("tab");
-
-  const tabs = [
-    { label: "서비스 이용약관", content: <TermsPage /> },
-    { label: "개인정보 처리방침", content: <PrivacyPage /> },
-  ];
-
-  const initialIndex = tab === "privacy" ? 1 : 0;
-
-  return <Tabs tabs={tabs} initialIndex={initialIndex} />;
+export default function TermsTabsPage() {
+  return <TermsTabs />;
 }

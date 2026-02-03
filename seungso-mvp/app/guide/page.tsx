@@ -1,20 +1,21 @@
-"use client";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
+import Guide from "./Guide";
 
-import Tabs from "@/components/ui/Tabs";
-import BasicTabContent from "./BasicTabContent";
-import FromTabContent from "./FromTabContent";
-import UiTabContent from "./UiTabContent";
+export default async function GuidePage() {
+  const supabase = await createSupabaseServerClient();
 
-export default function Guide() {
-  return (
-    <>
-      <Tabs
-        tabs={[
-          { label: "Basic", content: <BasicTabContent /> },
-          { label: "Form", content: <FromTabContent /> },
-          { label: "UI", content: <UiTabContent /> },
-        ]}
-      />
-    </>
-  );
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/member/login");
+  }
+
+  if (user.email !== process.env.ADMIN_USER_ID) {
+    redirect("/");
+  }
+
+  return <Guide />;
 }

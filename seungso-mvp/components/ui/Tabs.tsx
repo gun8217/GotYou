@@ -6,10 +6,15 @@ type Tab = { label: string; content: React.ReactNode };
 
 type TabsProps = {
   tabs: Tab[];
-  initialIndex?: number; // ✅ 추가
+  initialIndex?: number;
+  disableClick?: boolean;
 };
 
-export default function Tabs({ tabs, initialIndex = 0 }: TabsProps) {
+export default function Tabs({
+  tabs,
+  initialIndex = 0,
+  disableClick = false,
+}: TabsProps) {
   const [active, setActive] = useState(initialIndex);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
@@ -39,7 +44,9 @@ export default function Tabs({ tabs, initialIndex = 0 }: TabsProps) {
                 tabRefs.current[i] = el;
               }}
               className={`${styles.tab} ${active === i ? styles.active : ""}`}
-              onClick={() => setActive(i)}
+              onClick={() => {
+                if (!disableClick) setActive(i);
+              }}
             >
               {tab.label}
             </button>

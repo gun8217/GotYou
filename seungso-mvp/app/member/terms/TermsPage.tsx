@@ -2,11 +2,12 @@
 
 import Text from "@/components/ui/Text";
 import Title from "@/components/ui/Title";
-import styles from "./Terms.module.scss";
+
+import styles from "../MemberCommon.module.scss";
 
 export default function TermsPage() {
   return (
-    <div className={styles.termsPage}>
+    <div className={styles.terms}>
       <Title level={2}>서비스 이용약관</Title>
 
       <section>
@@ -34,6 +35,16 @@ export default function TermsPage() {
         <Text>
           이용자는 플랫폼이 정한 가입 양식에 따라 이메일 및 비밀번호를 입력하고
           본 약관과 개인정보 수집·이용에 동의함으로써 회원가입을 신청합니다.
+          <br />
+          <br />
+          본 플랫폼은 회원 가입 시 입력한 이메일 주소를 로그인 아이디로
+          사용합니다.
+          <br />
+          이용자는 본인이 관리할 수 있고 기억할 수 있는 이메일 주소를 정확히
+          입력해야 하며,
+          <br />
+          가입 시 사용한 이메일 주소를 분실하거나 기억하지 못하는 경우 플랫폼은
+          이를 별도로 안내하거나 확인해 줄 의무를 지지 않습니다.
         </Text>
       </section>
 
