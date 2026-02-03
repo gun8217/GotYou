@@ -46,61 +46,60 @@ export default function Header({ menu }: { menu: MenuItem[] }) {
   if (loading)
     return (
       <header>
-        <nav aria-label="상단 주요 메뉴">
-          <Link href="/" className="logo">
-            <span>
-              <Image src={logo} alt="승소환전소 로고" />
-            </span>
-            <b>승소환전소</b>
-          </Link>
-        </nav>
+        <div className="inner">
+          <nav aria-label="상단 주요 메뉴">
+            <Link href="/" className="logo">
+              <span>
+                <Image src={logo} alt="승소환전소 로고" />
+              </span>
+              <b>승소환전소</b>
+            </Link>
+          </nav>
+        </div>
       </header>
     );
 
   return (
     <>
       <header>
-        <nav aria-label="상단 주요 메뉴">
-          <Link href="/" className="logo">
-            <span>
-              <Image src={logo} alt="승소환전소 로고" />
-            </span>
-            <b>승소환전소</b>
-          </Link>
-          <div className="menuGroup">
-            {user && (
-              <Button styleType="icon" onClick={() => setIsMenuOpen(true)}>
-                <Icon icon="bars" size="lg" aria-label="메뉴" />
-              </Button>
-            )}
-
-            {user ? (
-              <>
-                <Link href="/member/signup">
-                  <Icon icon="user" size="lg" aria-label="회원정보" />
-                </Link>
-                <Button styleType="icon" onClick={() => handleLogout()}>
-                  <Icon
-                    icon="arrow-right-from-bracket"
-                    size="lg"
-                    aria-label="로그아웃"
-                  />
+        <div className="inner">
+          <nav aria-label="상단 주요 메뉴">
+            <Link href="/" className="logo">
+              <span>
+                <Image src={logo} alt="승소환전소 로고" />
+              </span>
+              <b>승소환전소</b>
+            </Link>
+            <div className="menuGroup">
+              {user && (
+                <Button styleType="icon" onClick={() => setIsMenuOpen(true)}>
+                  <Icon icon="bars" size="lg" aria-label="메뉴" />
                 </Button>
-              </>
-            ) : (
-              <>
-                <Link href="/member/login">
-                  <Icon icon="user-check" size="lg" aria-label="로그인" />
-                  로그인
-                </Link>
-                <Link href="/member/signup">
-                  <Icon icon="user-plus" size="lg" aria-label="회원가입" />
-                  회원가입
-                </Link>
-              </>
-            )}
-          </div>
-        </nav>
+              )}
+
+              {user ? (
+                <>
+                  <Link href="/member/signup">
+                    <Icon icon="user" size="lg" aria-label="회원정보" />
+                  </Link>
+                  <Button styleType="icon" onClick={() => handleLogout()}>
+                    <Icon
+                      icon="arrow-right-from-bracket"
+                      size="lg"
+                      aria-label="로그아웃"
+                    />
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Link href="/about">소개</Link>
+                  <Link href="/member/login">로그인</Link>
+                  <Link href="/member/signup">회원가입</Link>
+                </>
+              )}
+            </div>
+          </nav>
+        </div>
       </header>
 
       {isMenuOpen && (

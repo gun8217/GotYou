@@ -1,3 +1,7 @@
+import Flex from "@/components/ui/Flex";
+
+import styles from "../MemberCommon.module.scss";
+
 import SignUpInfo from "./SignUpInfo";
 
 export const metadata = {
@@ -6,5 +10,9 @@ export const metadata = {
 };
 
 export default function SignUpPage() {
-  return <SignUpInfo />;
+  return (
+    <Flex direction="column" className={styles.MemberWrap}>
+      <SignUpInfo />
+    </Flex>
+  );
 }

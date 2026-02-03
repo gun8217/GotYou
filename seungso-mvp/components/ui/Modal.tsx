@@ -1,5 +1,5 @@
 "use client";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Icon from "@/components/ui/Icon";
 import { ReactNode } from "react";
 import styles from "./Modal.module.scss";
 
@@ -26,13 +26,7 @@ export default function Modal({
         {/* Header */}
         <div className={styles.header}>
           {header && <div className={styles.headerContent}>{header}</div>}
-          <button
-            className={styles.closeBtn}
-            onClick={onClose}
-            aria-label="닫기"
-          >
-            <FontAwesomeIcon icon="times" />
-          </button>
+          <Icon icon="xmark" size="lg" aria-label="닫기" onClick={onClose} />
         </div>
 
         {/* Body */}

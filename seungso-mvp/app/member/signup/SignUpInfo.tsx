@@ -1,41 +1,57 @@
 "use client";
+import { useState } from "react";
+
 import Button from "@/components/ui/Button";
 import Flex from "@/components/ui/Flex";
+import Icon from "@/components/ui/Icon";
 import Tabs from "@/components/ui/Tabs";
 import Text from "@/components/ui/Text";
-import { useState } from "react";
-import SignUpForm from "./SignUpForm";
+import Title from "@/components/ui/Title";
 
 import styles from "../MemberCommon.module.scss";
+
+import SignUpForm from "./SignUpForm";
 
 export default function SignUpSteps() {
   const [step, setStep] = useState(0);
 
   const tabs = [
     {
-      label: "1단계 안내",
+      label: "가입 전 안내",
       content: (
         <>
-          <Flex direction="column" gap={16} className={styles.form}>
-            <Text>⚠</Text>
-            <Text>승소환전소는 이메일 주소가 아이디입니다.</Text>
-            <Text>
-              가입한 이메일을 잊어버리면 저희가 대신 찾아드릴 수 없습니다.
+          <Flex direction="column" gap={8} className={styles.SignUpInfo}>
+            <Text className={styles.ico}>⚠</Text>
+            <Text color="info">이메일 주소가 곧 아이디가 됩니다.</Text>
+            <Text color="info">
+              보안상 가입된 이메일을 별도로 안내해 드릴 수 없으니,
             </Text>
-            <Text>꼭 본인이 기억할 수 있는 이메일을 입력해 주세요.</Text>
+            <Text color="primary" weight="bold" size="lg">
+              반드시 직접 확인 가능한 이메일을 사용해 주시기 바랍니다.
+            </Text>
           </Flex>
 
-          <Button onClick={() => setStep(1)}>
-            내용을 이해했고 가입하겠습니다.
+          <Button
+            styleType="animate"
+            className={styles.SignUpBtn}
+            onClick={() => setStep(1)}
+          >
+            확인 후 다음단계
+            <Icon className="rightBtn" icon="chevron-right" />
           </Button>
         </>
       ),
     },
     {
-      label: "2단계 가입",
+      label: "정보 입력",
       content: <SignUpForm />,
     },
   ];
 
-  return <Tabs tabs={tabs} initialIndex={step} disableClick />;
+  return (
+    <>
+      <Title level={1}>회원가입</Title>
+      <Tabs tabs={tabs} initialIndex={step} disableClick className="alignC" />
+    </>
+  );
 }

@@ -1,3 +1,5 @@
+"use client";
+import React from "react";
 import styles from "./Button.module.scss";
 
 type ButtonProps = {
@@ -10,6 +12,7 @@ type ButtonProps = {
     | "animate"
     | "error"
     | "icon";
+  size?: "sm" | "md" | "lg";
   type?: "button" | "submit" | "reset";
   fullWidth?: boolean;
   disabled?: boolean;
@@ -20,6 +23,7 @@ export default function Button({
   children,
   onClick,
   styleType = "default",
+  size = "md",
   type = "button",
   fullWidth = false,
   disabled = false,
@@ -30,7 +34,13 @@ export default function Button({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`${styles.button} ${styles[styleType]} ${fullWidth ? styles.fullWidth : ""} ${className}`}
+      className={`
+        ${styles.button} 
+        ${styles[styleType]} 
+        ${styles[size]} 
+        ${fullWidth ? styles.fullWidth : ""} 
+        ${className}
+      `.trim()}
     >
       {children}
     </button>

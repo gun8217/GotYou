@@ -3,21 +3,22 @@
    ======================================== */
 
 /* ----------------------------------------
-   00. layout
+   0. layout
    ---------------------------------------- */
 
 $min-width: 750px;
 $inner-width: 1024px;
 $inner-margin-x: auto;
+$content-height-full: calc(100vh - 48px - 30px);
 
 /* ----------------------------------------
    1. Colors
    ---------------------------------------- */
 
-/* Brand */
-$color-primary: #1e40af; // blue-800
-$color-primary-hover: #2563eb; // blue-600
-$color-primary-active: #3b82f6; // blue-500
+/* Brand - Energetic Success Blue */
+$color-primary: #0284c7;
+$color-primary-hover: #075985;
+$color-primary-active: #0c4a6e;
 
 /* Neutral */
 $color-black: #0f172a; // slate-900
@@ -28,20 +29,25 @@ $color-gray-300: #cbd5e1; // slate-300
 $color-gray-100: #f1f5f9; // slate-100
 $color-white: #fff;
 
+/* Neutral - 텍스트 가독성 강화 */
+$color-text-title: #0f172a; // Slate-900
+$color-text-body: #334155; // Slate-700
+$color-text-muted: #64748b; // Slate-500
+
 /* Semantic */
-$color-success: #10b981; // green-500
+$color-success: #059669; // green-500
 $color-warning: #fbbf24; // yellow-400
-$color-error: #ef4444; // red-500
+$color-error: #dc2626; // red-500
 $color-info: #0ea5e9; // sky-500
 
 /* Background */
 $color-bg-body: #f8fafc; // slate-50
-$color-bg-card: #fff;
 $color-bg-muted: #f1f5f9; // slate-100
+$color-bg-card: #fff;
 
 /* Border */
-$color-border-default: $color-gray-300;
-$color-border-muted: $color-gray-100;
+$color-border-default: #e2e8f0;
+$color-border-muted: #f1f5f9;
 $color-border-white: $color-white;
 
 /* ----------------------------------------
@@ -117,7 +123,7 @@ $radius-full: 50%;
    ---------------------------------------- */
 
 $shadow-xs: 1px 0 0 rgba(0, 0, 0, 0.05);
-$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.15);
 $shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
 $shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
 $shadow-white-sm: 0 1px 2px rgba(255, 255, 255, 0.05);
@@ -138,10 +144,9 @@ $z-index-toast: 1100;
    7. Breakpoints
    ---------------------------------------- */
 
-$breakpoint-sm: 480px;
+$breakpoint-sm: 320px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 1024px;
-$breakpoint-xl: 1280px;
 
 /* ----------------------------------------
    8. Transitions

@@ -1,3 +1,5 @@
+// Checkbox.tsx
+"use client";
 import React from "react";
 import styles from "./Checkbox.module.scss";
 
@@ -17,7 +19,7 @@ export default function Checkbox({
   readOnly = false,
 }: CheckboxProps) {
   return (
-    <label className={styles.wrapper}>
+    <label className={styles.checkboxWrapper}>
       <input
         type="checkbox"
         checked={checked}

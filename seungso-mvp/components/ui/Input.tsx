@@ -26,6 +26,7 @@ type InputProps = {
   min?: number;
   max?: number;
   step?: number;
+  autoComplete?: string;
 };
 
 export default function Input({
@@ -41,6 +42,7 @@ export default function Input({
   min,
   max,
   step,
+  autoComplete,
 }: InputProps) {
   return (
     <div className={styles.inputWrapper}>
@@ -59,6 +61,7 @@ export default function Input({
           disabled={disabled}
           required={required}
           rows={rows}
+          autoComplete={autoComplete}
           className={`${styles.textarea} ${error ? styles.error : ""}`}
         />
       ) : (
@@ -72,6 +75,7 @@ export default function Input({
           min={min}
           max={max}
           step={step}
+          autoComplete={autoComplete}
           className={`${styles.input} ${error ? styles.error : ""}`}
         />
       )}

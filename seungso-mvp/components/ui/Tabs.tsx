@@ -8,12 +8,16 @@ type TabsProps = {
   tabs: Tab[];
   initialIndex?: number;
   disableClick?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
 };
 
 export default function Tabs({
   tabs,
   initialIndex = 0,
   disableClick = false,
+  className = "",
+  style,
 }: TabsProps) {
   const [active, setActive] = useState(initialIndex);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -33,8 +37,10 @@ export default function Tabs({
     }
   }, [active]);
 
+  const combinedClassName = `${styles.tabWrap} ${disableClick ? styles.isStepMode : ""} ${styles[className] || className}`;
+
   return (
-    <div className={styles.tabWrap}>
+    <div className={combinedClassName} style={style}>
       <div className={styles.tabList}>
         <div>
           {tabs.map((tab, i) => (
@@ -47,6 +53,7 @@ export default function Tabs({
               onClick={() => {
                 if (!disableClick) setActive(i);
               }}
+              tabIndex={disableClick ? -1 : 0}
             >
               {tab.label}
             </button>

@@ -2,39 +2,45 @@
 
 /* Base Button */
 .button {
-  padding: 6px 12px; // spacing-1.5 spacing-3
+  padding: $spacing-2 $spacing-4;
+  font-size: $font-size-sm;
+  line-height: $line-height-relaxed;
   border: none;
-  border-radius: 4px; // $radius-sm
-  font-size: 14px; // $font-size-sm
+  border-radius: $radius-sm;
+  transition: all $transition-base;
   cursor: pointer;
-  transition: all 0.3s ease; // $transition-base
+  svg {
+    &.left {
+      margin-right: 6px;
+    }
+    &.right {
+      margin-left: 6px;
+    }
+  }
 }
 
 .default {
-  border: 1px solid $color-border-default; // gray-300
+  border: 1px solid $color-border-default;
   background: $color-white;
   color: $color-gray-700;
 }
 
 .primary {
-  color: $color-white;
-  background: $color-primary; // blue-800
-  font-weight: $font-weight-semibold;
-
+  color: rgba($color-white, 0.87);
+  background: $color-primary;
   &:hover {
-    background: $color-primary-hover; // blue-600
+    color: $color-white;
+    background: $color-primary-hover;
   }
-
   &:active {
-    background: $color-primary-active; // blue-500
+    background: $color-primary-active;
   }
 }
 
 .secondary {
-  background-color: $color-gray-100; // slate-100
-  color: $color-gray-700; // slate-700
-  border: 1px solid $color-gray-300; // slate-300
-
+  background-color: $color-gray-100;
+  color: $color-gray-700;
+  border: 1px solid $color-gray-300;
   &:hover {
     background-color: $color-gray-300;
   }
@@ -42,35 +48,49 @@
 
 .error {
   color: $color-white;
-  background: $color-error; // red-500
+  background: $color-error;
   font-weight: $font-weight-medium;
-
   &:hover {
     background: darken($color-error, 5%);
   }
-
   &:active {
     background: darken($color-error, 10%);
   }
 }
 
 button:disabled {
-  background: $color-gray-300;
   color: $color-gray-500;
-  cursor: not-allowed;
+  background: $color-gray-300;
   opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.sm {
+  padding: $spacing-1 $spacing-3;
+  font-size: $font-size-sm;
+}
+
+.lg {
+  padding: $spacing-4 $spacing-8;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
 }
 
 .fullWidth {
   width: 100%;
 }
 
+.icon {
+  border: 0 none;
+  background: transparent;
+  color: $color-gray-700;
+}
+
 .animate {
-  padding-top: 4px;
-  color: #fff;
-  font-weight: 500;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  border-top: 2px solid transparent;
+  color: $color-white;
+  font-weight: $font-weight-medium;
+  text-shadow: $shadow-sm;
+  border-top: transparent 2px solid;
   background: linear-gradient(
     45deg,
     rgba(0, 0, 0, 0.3) 0%,
@@ -92,10 +112,4 @@ button:disabled {
   100% {
     background-position: 0% 50%;
   }
-}
-
-.icon {
-  border: 0 none;
-  background: transparent;
-  color: $color-gray-700;
 }

@@ -19,9 +19,8 @@
       border: none;
       padding: $spacing-2 $spacing-4;
       font-size: $font-size-md;
-      font-family: $font-family-base;
       font-weight: $font-weight-medium;
-      color: $color-gray-700;
+      color: $color-gray-300;
       cursor: pointer;
       transition: color $transition-base;
       &:hover {
@@ -42,6 +41,28 @@
     & + div {
       max-width: $inner-width;
       margin: 0 $inner-margin-x;
+    }
+  }
+
+  &.isStepMode {
+    .tab {
+      cursor: default;
+      &:hover {
+        color: $color-gray-300;
+      }
+      &.active {
+        color: $color-primary;
+      }
+    }
+  }
+
+  &.alignC .tabList > div {
+    justify-content: center;
+    gap: $spacing-8;
+    .tab {
+      padding: $spacing-4 $spacing-16;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
     }
   }
 }

@@ -1,0 +1,52 @@
+@use "@/app/styles/variables" as *;
+
+.MemberWrap {
+  min-height: $content-height-full;
+  text-align: center;
+  background-color: $color-bg-card;
+  h1 {
+    margin: $spacing-10 0 $spacing-6;
+  }
+}
+
+.SignUpInfo {
+  .ico {
+    font-size: 150px;
+    color: $color-gray-300;
+  }
+}
+.SignUpBtn {
+  margin-top: $spacing-8;
+  svg {
+    margin-top: -1px;
+    transition: all $transition-fast;
+  }
+  &:hover {
+    svg {
+      margin-right: -4px;
+      padding-left: 4px;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.SignUpForm {
+  width: $min-width;
+  margin: $spacing-10 $inner-margin-x 0;
+  padding: 0 130px;
+  .passwordField {
+    position: relative;
+    .eyeIcon {
+      position: absolute;
+      top: 50%;
+      right: $spacing-2;
+      color: $color-gray-500;
+      font-size: $font-size-sm;
+      transform: translateY(-50%);
+      transition: all $transition-fast;
+      &:hover {
+        color: $color-gray-700;
+      }
+    }
+  }
+}

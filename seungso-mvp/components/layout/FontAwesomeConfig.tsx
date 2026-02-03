@@ -12,6 +12,7 @@ import {
   faCompass,
   faEye,
   faEyeSlash,
+  faHandPointer,
   faTimes,
   faUser,
   faUserCheck,
@@ -34,6 +35,7 @@ library.add(
   faEye,
   faEyeSlash,
   faCompass,
+  faHandPointer,
 );
 
 export default function FontAwesomeConfig() {

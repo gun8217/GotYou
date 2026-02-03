@@ -22,8 +22,8 @@ type FlexProps = {
 export default function Flex({
   children,
   direction = "row",
-  justify = "flex-start",
-  align = "stretch",
+  justify,
+  align,
   gap = 0,
   className = "",
   style = {},

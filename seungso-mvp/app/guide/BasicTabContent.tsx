@@ -51,18 +51,24 @@ export default function Guide() {
       <Badge text="Error" color="error" />
 
       <Title text="Button" level={5} />
-      <Flex gap={8}>
-        <Button>Default</Button>
-        <Button styleType="primary">Primary</Button>
-        <Button styleType="secondary">Secondary</Button>
-        <Button styleType="animate">Animate</Button>
-        <Button styleType="error">Error</Button>
-        <Button type="submit">Submit</Button>
-        <Button type="reset">Reset</Button>
-        <Button disabled>Disabled</Button>
-        <Button onClick={() => alert("Clicked!")}>Click Me</Button>
-      </Flex>
-      <Flex style={{ marginTop: "8px" }}>
+      <Flex direction="column" gap={8}>
+        <Flex align="flex-start" gap={8}>
+          <Button size="sm">size=&quot;sm&quot;</Button>
+          <Button>md(Default)</Button>
+          <Button size="lg">size=&quot;lg&quot;</Button>
+        </Flex>
+        <Flex gap={8}>
+          <Button styleType="primary">styleType=&quot;primary&quot;</Button>
+          <Button styleType="secondary">styleType=&quot;secondary&quot;</Button>
+          <Button styleType="animate">styleType=&quot;animate&quot;</Button>
+          <Button styleType="error">styleType=&quot;error&quot;</Button>
+        </Flex>
+        <Flex gap={8}>
+          <Button type="submit">type=&quot;submit&quot;</Button>
+          <Button type="reset">type=&quot;reset&quot;</Button>
+          <Button disabled>disabled</Button>
+          <Button onClick={() => alert("Clicked!")}>Click Me</Button>
+        </Flex>
         <Button fullWidth>Full Width</Button>
       </Flex>
 
@@ -81,6 +87,7 @@ export default function Guide() {
         <Icon icon="eye" />
         <Icon icon="eye-slash" />
         <Icon icon="compass" />
+        <Icon icon="hand-pointer" />
       </Flex>
 
       <Title text="Spinner" level={5} />
