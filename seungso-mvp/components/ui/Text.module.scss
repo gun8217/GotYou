@@ -9,19 +9,29 @@
 /* ----------------------------------------
    Size
    ---------------------------------------- */
+.xs {
+  font-size: $font-size-xs;
+  letter-spacing: $font-spacing-xs;
+}
 .sm {
   font-size: $font-size-sm;
   letter-spacing: $font-spacing-sm;
 }
-
 .md {
   font-size: $font-size-md;
   letter-spacing: $font-spacing-md;
 }
-
 .lg {
   font-size: $font-size-lg;
   letter-spacing: $font-spacing-lg;
+}
+.xl {
+  font-size: $font-size-xl;
+  letter-spacing: $font-spacing-xl;
+}
+.xxl {
+  font-size: $font-size-2xl;
+  letter-spacing: $font-spacing-2xl;
 }
 
 /* ----------------------------------------

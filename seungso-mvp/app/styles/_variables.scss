@@ -69,8 +69,6 @@ $font-size-md: 1rem; // 16px
 $font-size-lg: 1.125rem; // 18px
 $font-size-xl: 1.25rem; // 20px
 $font-size-2xl: 1.5rem; // 24px
-$font-size-3xl: 2rem;
-$font-size-4xl: 3rem;
 
 /* Font weights */
 $font-weight-thin: 300;
@@ -80,6 +78,7 @@ $font-weight-semibold: 600;
 $font-weight-bold: 700;
 
 /* Letter Spacing sizes */
+$font-spacing-xs: -0.02rem;
 $font-spacing-sm: -0.015rem;
 $font-spacing-md: -0.01rem;
 $font-spacing-lg: 0.01rem;

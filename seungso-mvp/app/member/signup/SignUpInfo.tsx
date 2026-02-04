@@ -26,8 +26,8 @@ export default function SignUpSteps() {
             <Text color="info">
               보안상 가입된 이메일을 별도로 안내해 드릴 수 없으니,
             </Text>
-            <Text color="primary" weight="bold" size="lg">
-              반드시 직접 확인 가능한 이메일을 사용해 주시기 바랍니다.
+            <Text color="primary" weight="bold" size="xl">
+              반드시 직접 확인 가능한 이메일로 가입해 주시기 바랍니다.
             </Text>
           </Flex>
 

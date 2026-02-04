@@ -3,7 +3,7 @@ import styles from "./Text.module.scss";
 
 type BaseProps = {
   children: React.ReactNode;
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
   weight?: "normal" | "bold" | "light";
   color?: "default" | "primary" | "secondary" | "info" | "error";
   as?: "p" | "span" | "div" | "button";

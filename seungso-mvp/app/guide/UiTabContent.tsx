@@ -19,57 +19,73 @@ export default function Guide() {
   const { addToast } = useToast();
 
   return (
-    <Flex direction="column" align="flex-start" gap={4}>
-      <Title text="Tooltip" level={5} />
-      <Tooltip text="툴팁 메시지">마우스를 올려보세요</Tooltip>
-
-      <Title text="Modal" level={5} />
-      <Button styleType="secondary" onClick={handleOpen}>
-        모달 열기
-      </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        header="타이틀"
-        footer={
-          <>
-            <button onClick={handleClose}>취소</button>
-            <button onClick={() => alert("확인!")}>확인</button>
-          </>
-        }
-      >
-        <p>내용 출력</p>
-      </Modal>
-
-      <Title text="Toast" level={5} />
-      <Flex gap={8}>
-        <Button onClick={() => addToast("저장 완료!", "success")}>
-          success
-        </Button>
-        <Button onClick={() => addToast("에러 발생!", "error")}>error</Button>
-        <Button onClick={() => addToast("정보 알림!", "info")}>info</Button>
+    <Flex direction="column" gap={32}>
+      <Flex direction="column" align="flex-start" gap={8}>
+        <Title text="Tooltip" />
+        <Tooltip text="툴팁 메시지">마우스를 올려보세요</Tooltip>
       </Flex>
 
-      <Title text="Tabs" level={5} />
-      <Tabs
-        tabs={[
-          { label: "탭 1", content: <p>첫 번째 탭 내용</p> },
-          { label: "탭 2", content: <p>두 번째 탭 내용</p> },
-          { label: "탭 3", content: <p>세 번째 탭 내용</p> },
-        ]}
-      />
+      <Flex justify="space-between">
+        <Flex direction="column" gap={8}>
+          <Title text="Modal" />
+          <Button styleType="secondary" onClick={handleOpen}>
+            모달 열기
+          </Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            header="타이틀"
+            footer={
+              <>
+                <button onClick={handleClose}>취소</button>
+                <button onClick={() => alert("확인!")}>확인</button>
+              </>
+            }
+          >
+            <p>내용 출력</p>
+          </Modal>
+        </Flex>
 
-      <Title text="Accordion" level={5} />
-      <Accordion
-        items={[
-          { title: "아코디언 1", content: <p>내용 1</p> },
-          { title: "아코디언 2", content: <p>내용 2</p> },
-          { title: "아코디언 3", content: <p>내용 3</p> },
-        ]}
-      />
+        <Flex direction="column" gap={8} style={{ width: "50%" }}>
+          <Title text="Toast" />
+          <Flex gap={8}>
+            <Button onClick={() => addToast("저장 완료!", "success")}>
+              success
+            </Button>
+            <Button onClick={() => addToast("에러 발생!", "error")}>
+              error
+            </Button>
+            <Button onClick={() => addToast("정보 알림!", "info")}>info</Button>
+          </Flex>
+        </Flex>
+      </Flex>
 
-      <Title text="Card" level={5} />
-      <Card title="카드 타이틀">카드 본문 내용입니다.</Card>
+      <Flex direction="column" gap={8}>
+        <Title text="Tabs" />
+        <Tabs
+          tabs={[
+            { label: "탭 1", content: <p>첫 번째 탭 내용</p> },
+            { label: "탭 2", content: <p>두 번째 탭 내용</p> },
+            { label: "탭 3", content: <p>세 번째 탭 내용</p> },
+          ]}
+        />
+      </Flex>
+
+      <Flex direction="column" gap={8}>
+        <Title text="Accordion" />
+        <Accordion
+          items={[
+            { title: "아코디언 1", content: <p>내용 1</p> },
+            { title: "아코디언 2", content: <p>내용 2</p> },
+            { title: "아코디언 3", content: <p>내용 3</p> },
+          ]}
+        />
+      </Flex>
+
+      <Flex direction="column" gap={8}>
+        <Title text="Card" />
+        <Card title="카드 타이틀">카드 본문 내용입니다.</Card>
+      </Flex>
     </Flex>
   );
 }

@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "./Title.module.scss";
 
-type TitleLevel = 1 | 2 | 3 | 4 | 5 | 6;
+type TitleLevel = 1 | 2 | 3 | 4;
 type TitleType = "default" | "primary" | "secondary" | "highlight";
 
 type TitleProps = {
@@ -14,7 +14,7 @@ type TitleProps = {
 
 export default function Title({
   text,
-  level = 1,
+  level = 3,
   type = "default",
   children,
   className,
