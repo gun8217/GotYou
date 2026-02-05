@@ -4,11 +4,11 @@ import { ReactNode } from "react";
 import styles from "./Modal.module.scss";
 
 type ModalProps = {
-  open: boolean; // 모달 열림 여부
-  onClose: () => void; // 닫기 핸들러
-  header?: ReactNode; // 헤더 영역
-  footer?: ReactNode; // 푸터 영역
-  children: ReactNode; // 바디 영역
+  open: boolean;
+  onClose: () => void;
+  header?: ReactNode;
+  footer?: ReactNode;
+  children: ReactNode;
 };
 
 export default function Modal({
@@ -26,7 +26,7 @@ export default function Modal({
         {/* Header */}
         <div className={styles.header}>
           {header && <div className={styles.headerContent}>{header}</div>}
-          <Icon icon="xmark" size="lg" aria-label="닫기" onClick={onClose} />
+          <Icon icon="xmark" aria-label="닫기" onClick={onClose} />
         </div>
 
         {/* Body */}

@@ -2,27 +2,28 @@
 
 import { supabase } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
-const IDLE_LIMIT = 10 * 60 * 1000; // 10분
+const IDLE_LIMIT = 10 * 60 * 1000;
 
 export default function SessionTimeoutGuard() {
   const router = useRouter();
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const resetTimer = () => {
+  const resetTimer = useCallback(() => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
 
     timerRef.current = setTimeout(async () => {
       await supabase.auth.signOut();
-
-      router.replace("/login?reason=idle");
+      router.replace("/member/login?reason=idle");
     }, IDLE_LIMIT);
-  };
+  }, [router]);
 
   useEffect(() => {
+    console.log("SessionTimeoutGuard mounted");
+
     const events = [
       "mousemove",
       "keydown",
@@ -39,7 +40,7 @@ export default function SessionTimeoutGuard() {
       events.forEach((event) => window.removeEventListener(event, resetTimer));
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, []);
+  }, [resetTimer]);
 
   return null;
 }

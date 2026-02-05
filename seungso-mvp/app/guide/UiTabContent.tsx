@@ -37,8 +37,16 @@ export default function Guide() {
             header="타이틀"
             footer={
               <>
-                <button onClick={handleClose}>취소</button>
-                <button onClick={() => alert("확인!")}>확인</button>
+                <Button size="sm" onClick={handleClose}>
+                  취소
+                </Button>
+                <Button
+                  styleType="primary"
+                  size="sm"
+                  onClick={() => alert("확인!")}
+                >
+                  확인
+                </Button>
               </>
             }
           >

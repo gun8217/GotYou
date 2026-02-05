@@ -1,5 +1,7 @@
 import Flex from "@/components/ui/Flex";
 
+export const pageName = "회원가입";
+
 import styles from "../MemberCommon.module.scss";
 
 import SignUpInfo from "./SignUpInfo";

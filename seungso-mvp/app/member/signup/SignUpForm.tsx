@@ -1,5 +1,4 @@
 "use client";
-
 import { supabase } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
@@ -51,12 +50,11 @@ export default function SignUpForm() {
   };
 
   const isValidEmail = (val: string) => {
-    return /^[^\s@]+@[^\s@]+\.(com|net|kr|co\.kr|ac\.kr|go\.kr|or\.kr)$/i.test(
+    return /^[^\s@]+@(naver\.com|daum\.net|gmail\.com|hanmail\.net|nate\.com|hotmail\.com|yahoo\.co\.kr|outlook\.com|kakao\.com|com|net|kr|co\.kr|ac\.kr|go\.kr|or\.kr)$/i.test(
       val,
     );
   };
 
-  // 타입 안정성을 위해 핸들러 공통 타입 적용
   const handleInputChange =
     (setter: React.Dispatch<React.SetStateAction<string>>) =>
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -66,8 +64,23 @@ export default function SignUpForm() {
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!email) {
+      addToast("이메일을 입력해주세요.", "error");
+      return;
+    }
+
     if (!isValidEmail(email)) {
       addToast("유효한 이메일을 입력해주세요.", "error");
+      return;
+    }
+
+    if (!password) {
+      addToast("비밀번호를 입력해주세요.", "error");
+      return;
+    }
+
+    if (!confirmPassword) {
+      addToast("비밀번호 확인을 입력해주세요.", "error");
       return;
     }
 
@@ -98,25 +111,26 @@ export default function SignUpForm() {
 
   return (
     <>
-      <form onSubmit={handleSignUp} autoComplete="off">
+      {/* noValidate로 브라우저 기본 메시지 제거 */}
+      <form onSubmit={handleSignUp} autoComplete="off" noValidate>
         <Flex direction="column" gap={16} className={styles.SignUpForm}>
           <Input
             type="email"
-            autoComplete="new-password"
+            name="email"
+            autoComplete="email"
             placeholder="이메일"
             value={email}
             onChange={handleInputChange(setEmail)}
-            required
           />
 
           <div className={styles.passwordField}>
             <Input
               type={showPassword ? "text" : "password"}
+              name="new-password"
               autoComplete="new-password"
               placeholder="비밀번호"
               value={password}
               onChange={handleInputChange(setPassword)}
-              required
             />
             <span
               onClick={() => setShowPassword((p) => !p)}
@@ -132,7 +146,6 @@ export default function SignUpForm() {
               placeholder="비밀번호 확인"
               value={confirmPassword}
               onChange={handleInputChange(setConfirmPassword)}
-              required
             />
             <span
               onClick={() => setShowConfirmPassword((p) => !p)}
@@ -188,9 +201,9 @@ export default function SignUpForm() {
       <Modal
         open={openModal}
         onClose={() => setOpenModal(false)}
-        header={<Title level={4}>약관 안내</Title>}
+        header={<Title level={4}>안내</Title>}
         footer={
-          <Button fullWidth onClick={handleConfirmModal}>
+          <Button styleType="primary" onClick={handleConfirmModal}>
             확인 및 동의하기
           </Button>
         }

@@ -9,40 +9,39 @@
 $min-width: 750px;
 $inner-width: 1024px;
 $inner-margin-x: auto;
-$content-height-full: calc(100vh - 48px - 30px);
+$header: 48px;
+$footer: 31px;
+$content-height-full: calc(100vh - $header - $footer);
 
 /* ----------------------------------------
    1. Colors
    ---------------------------------------- */
 
-/* Brand - Energetic Success Blue */
-$color-primary: #0284c7;
-$color-primary-hover: #075985;
-$color-primary-active: #0c4a6e;
+/* Brand */
+$color-primary: #0c4a6e;
+$color-primary-hover: #0284c7;
+$color-primary-active: #075985;
 
 /* Neutral */
-$color-black: #0f172a; // slate-900
-$color-gray-900: #1e293b; // slate-800
-$color-gray-700: #334155; // slate-700
-$color-gray-500: #64748b; // slate-500
-$color-gray-300: #cbd5e1; // slate-300
-$color-gray-100: #f1f5f9; // slate-100
+$color-black: #0f172a;
+$color-gray-900: #1e293b;
+$color-gray-700: #334155;
+$color-gray-500: #64748b;
+$color-gray-300: #cbd5e1;
+$color-gray-100: #f1f5f9;
 $color-white: #fff;
 
-/* Neutral - 텍스트 가독성 강화 */
-$color-text-title: #0f172a; // Slate-900
-$color-text-body: #334155; // Slate-700
-$color-text-muted: #64748b; // Slate-500
-
 /* Semantic */
-$color-success: #059669; // green-500
-$color-warning: #fbbf24; // yellow-400
-$color-error: #dc2626; // red-500
-$color-info: #0ea5e9; // sky-500
+$color-success: #059669;
+$color-warning: #fbbf24;
+$color-error: #dc2626;
+$color-info: #0ea5e9;
+$color-link: #0284c7;
+$color-link-hover: #075985;
 
 /* Background */
-$color-bg-body: #f8fafc; // slate-50
-$color-bg-muted: #f1f5f9; // slate-100
+$color-bg-body: #f8fafc;
+$color-bg-muted: #f1f5f9;
 $color-bg-card: #fff;
 
 /* Border */

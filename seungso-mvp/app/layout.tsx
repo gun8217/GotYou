@@ -1,4 +1,5 @@
 import "@/app/globals.scss";
+import ClientLayout from "@/components/layout/ClientLayout";
 import FontAwesomeConfig from "@/components/layout/FontAwesomeConfig";
 import Header from "@/components/layout/Header";
 import ThemeWrapper from "@/components/layout/ThemeWrapper";
@@ -31,9 +32,11 @@ export default function RootLayout({
       <body>
         <ThemeWrapper>
           <ToastProvider>
-            <Header menu={menu} />
-            <main>{children}</main>
-            <footer>Copyright ⓒ 2026 승소환전소.</footer>
+            <ClientLayout>
+              <Header menu={menu} />
+              <main>{children}</main>
+              <footer>Copyright ⓒ 2026 승소환전소.</footer>
+            </ClientLayout>
           </ToastProvider>
         </ThemeWrapper>
       </body>

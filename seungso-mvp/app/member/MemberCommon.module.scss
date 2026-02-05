@@ -17,22 +17,11 @@
 }
 .SignUpBtn {
   margin-top: $spacing-8;
-  svg {
-    margin-top: -1px;
-    transition: all $transition-fast;
-  }
-  &:hover {
-    svg {
-      margin-right: -4px;
-      padding-left: 4px;
-      transform: scale(1.1);
-    }
-  }
 }
 
 .SignUpForm {
   width: $min-width;
-  margin: $spacing-10 $inner-margin-x 0;
+  margin: $spacing-16 $inner-margin-x 0;
   padding: 0 130px;
   .passwordField {
     position: relative;
@@ -48,5 +37,18 @@
         color: $color-gray-700;
       }
     }
+  }
+}
+
+.terms section {
+  margin-top: $spacing-10;
+  text-align: left;
+}
+
+.LoginCard {
+  width: 420px;
+  margin: $spacing-6 $inner-margin-x $spacing-16;
+  .topMsg {
+    margin-bottom: $spacing-5;
   }
 }

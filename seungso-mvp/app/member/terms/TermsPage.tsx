@@ -8,7 +8,7 @@ import styles from "../MemberCommon.module.scss";
 export default function TermsPage() {
   return (
     <div className={styles.terms}>
-      <Title level={2}>서비스 이용약관</Title>
+      <Title level={3}>서비스 이용약관</Title>
 
       <section>
         <Title level={4}>제1조 (목적)</Title>

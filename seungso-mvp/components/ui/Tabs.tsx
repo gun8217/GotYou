@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./Tabs.module.scss";
 
 type Tab = { label: string; content: React.ReactNode };
@@ -23,11 +23,8 @@ export default function Tabs({
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
 
-  useEffect(() => {
-    setActive(initialIndex);
-  }, [initialIndex]);
-
-  useEffect(() => {
+  // ✅ indicator 위치 갱신 함수 (useCallback으로 고정)
+  const updateIndicator = useCallback(() => {
     const currentTab = tabRefs.current[active];
     if (currentTab) {
       setIndicatorStyle({
@@ -37,7 +34,27 @@ export default function Tabs({
     }
   }, [active]);
 
-  const combinedClassName = `${styles.tabWrap} ${disableClick ? styles.isStepMode : ""} ${styles[className] || className}`;
+  // initialIndex 바뀌면 active도 동기화
+  useEffect(() => {
+    setActive(initialIndex);
+  }, [initialIndex]);
+
+  // active 바뀌면 indicator 이동
+  useEffect(() => {
+    updateIndicator();
+  }, [updateIndicator]);
+
+  // resize 이벤트에도 반응
+  useEffect(() => {
+    window.addEventListener("resize", updateIndicator);
+    return () => {
+      window.removeEventListener("resize", updateIndicator);
+    };
+  }, [updateIndicator]);
+
+  const combinedClassName = `${styles.tabWrap} ${
+    disableClick ? styles.isStepMode : ""
+  } ${styles[className] || className}`;
 
   return (
     <div className={combinedClassName} style={style}>
@@ -61,7 +78,10 @@ export default function Tabs({
 
           <span
             className={styles.indicator}
-            style={{ left: indicatorStyle.left, width: indicatorStyle.width }}
+            style={{
+              left: indicatorStyle.left,
+              width: indicatorStyle.width,
+            }}
           />
         </div>
       </div>

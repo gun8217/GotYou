@@ -14,6 +14,7 @@ type InputProps = {
     | "range"
     | "file"
     | "textarea";
+  name?: string;
   value?: string;
   placeholder?: string;
   onChange: (
@@ -32,6 +33,7 @@ type InputProps = {
 export default function Input({
   label,
   type = "text",
+  name,
   value,
   placeholder,
   onChange,
@@ -55,6 +57,7 @@ export default function Input({
 
       {type === "textarea" ? (
         <textarea
+          name={name}
           value={value}
           placeholder={placeholder}
           onChange={onChange}
@@ -67,6 +70,7 @@ export default function Input({
       ) : (
         <input
           type={type}
+          name={name}
           value={value}
           placeholder={placeholder}
           onChange={onChange}

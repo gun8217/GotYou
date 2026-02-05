@@ -24,20 +24,24 @@ export default function SignUpSteps() {
             <Text className={styles.ico}>⚠</Text>
             <Text color="info">이메일 주소가 곧 아이디가 됩니다.</Text>
             <Text color="info">
-              보안상 가입된 이메일을 별도로 안내해 드릴 수 없으니,
+              보안상 가입 이메일은 별도로 안내되지 않습니다.
             </Text>
             <Text color="primary" weight="bold" size="xl">
-              반드시 직접 확인 가능한 이메일로 가입해 주시기 바랍니다.
+              반드시 기억하기 쉬운 이메일로 가입해 주세요.
+            </Text>
+            <Text color="info">
+              회원님의 소중한 정보는 안전하게 보호됩니다.
             </Text>
           </Flex>
 
           <Button
-            styleType="animate"
+            styleType="primary"
+            size="lg"
             className={styles.SignUpBtn}
             onClick={() => setStep(1)}
           >
             확인 후 다음단계
-            <Icon className="rightBtn" icon="chevron-right" />
+            <Icon icon="chevron-right" />
           </Button>
         </>
       ),

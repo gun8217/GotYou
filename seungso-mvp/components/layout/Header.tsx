@@ -1,7 +1,6 @@
 "use client";
 import SideMenu from "@/components/layout/SideMenu";
 import Button from "@/components/ui/Button";
-import Icon from "@/components/ui/Icon";
 import { MenuItem } from "@/lib/menu";
 import { supabase } from "@/lib/supabase/client";
 import logo from "@/public/images/logo.svg";
@@ -39,8 +38,11 @@ export default function Header({ menu }: { menu: MenuItem[] }) {
   }, []);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    router.push("/");
+    const { error } = await supabase.auth.signOut();
+
+    if (!error) {
+      router.replace("/");
+    }
   };
 
   if (loading)
@@ -71,28 +73,31 @@ export default function Header({ menu }: { menu: MenuItem[] }) {
               <b>승소환전소</b>
             </Link>
             <div className="menuGroup">
+              <Link href="/about">소개</Link>
               {user && (
                 <Button styleType="icon" onClick={() => setIsMenuOpen(true)}>
-                  <Icon icon="bars" size="lg" aria-label="메뉴" />
+                  {/* <Icon icon="bars" size="lg" aria-label="메뉴" /> */}
+                  메뉴
                 </Button>
               )}
 
               {user ? (
                 <>
                   <Link href="/member/signup">
-                    <Icon icon="user" size="lg" aria-label="회원정보" />
+                    {/* <Icon icon="user" size="lg" aria-label="회원정보" /> */}
+                    회원정보
                   </Link>
                   <Button styleType="icon" onClick={() => handleLogout()}>
-                    <Icon
+                    {/* <Icon
                       icon="arrow-right-from-bracket"
                       size="lg"
                       aria-label="로그아웃"
-                    />
+                    /> */}
+                    로그아웃
                   </Button>
                 </>
               ) : (
                 <>
-                  <Link href="/about">소개</Link>
                   <Link href="/member/login">로그인</Link>
                   <Link href="/member/signup">회원가입</Link>
                 </>

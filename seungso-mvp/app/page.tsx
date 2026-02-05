@@ -195,9 +195,9 @@ export default function HeroSection() {
             whiteSpace: "pre",
             color: isHighlightedZone ? HIGHLIGHT_COLOR : "inherit",
             fontWeight: isHighlightedZone ? "700" : "inherit",
-            fontSize: isHighlightedZone ? "1.75rem" : "inherit",
+            fontSize: isHighlightedZone ? "2.5rem" : "inherit",
             textShadow: isHighlightedZone
-              ? "0px 0px 8px rgba(255,255,255,0.6)"
+              ? "0px 0px 4px rgba(255,255,255,0.7)"
               : "none",
           }}
         >
@@ -267,7 +267,7 @@ export default function HeroSection() {
         </motion.p>
 
         <motion.div variants={itemUp}>
-          <Button className={styles.mainBtn}>나의 판결문 확인하기</Button>
+          <Button className={styles.mainBtn}>서비스 둘러보기</Button>
         </motion.div>
       </motion.div>
     </section>

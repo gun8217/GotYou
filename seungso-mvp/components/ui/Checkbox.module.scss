@@ -6,7 +6,7 @@
   cursor: pointer;
 
   .checkbox {
-    margin-right: 8px;
+    margin-right: 6px;
   }
 
   .label {
@@ -16,5 +16,11 @@
   }
   &:hover .label {
     color: $color-gray-900;
+  }
+
+  [type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: $color-primary-active;
   }
 }

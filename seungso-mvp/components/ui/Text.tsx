@@ -20,13 +20,14 @@ export default function Text({
   weight = "normal",
   color = "default",
   as = "p",
+  className = "",
   ...rest
 }: TextProps) {
   const Tag = as as React.ElementType;
 
   return (
     <Tag
-      className={`${styles.text} ${styles[size]} ${styles[weight]} ${styles[color]}`}
+      className={`${styles.text} ${styles[size]} ${styles[weight]} ${styles[color]} ${className}`}
       {...rest}
     >
       {children}
