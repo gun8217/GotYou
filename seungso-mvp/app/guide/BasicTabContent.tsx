@@ -93,6 +93,14 @@ export default function Guide() {
           <Icon icon="eye-slash" />
           <Icon icon="compass" />
           <Icon icon="hand-pointer" />
+          <Icon icon="triangle-exclamation" />
+          <Icon icon="pen-to-square" />
+          <Icon icon="rotate-left" />
+          <Icon icon="unlock-keyhole" />
+          <Icon icon="key" />
+          <Icon icon="envelope-circle-check" />
+          <Icon icon="ban" />
+          <Icon icon="circle-question" />
         </Flex>
       </Flex>
 

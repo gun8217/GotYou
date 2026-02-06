@@ -16,6 +16,7 @@ import TermsPage from "@/app/member/terms/TermsPage";
 
 import { useToast } from "@/components/ui/ToastProvider";
 
+import Text from "@/components/ui/Text";
 import styles from "../MemberCommon.module.scss";
 
 export default function SignUpForm() {
@@ -38,6 +39,8 @@ export default function SignUpForm() {
     "terms",
   );
 
+  const [openRateLimitModal, setOpenRateLimitModal] = useState(false);
+
   const handleConfirmModal = () => {
     if (modalContent === "terms") setAgreeTerms(true);
     if (modalContent === "privacy") setAgreePrivacy(true);
@@ -50,9 +53,20 @@ export default function SignUpForm() {
   };
 
   const isValidEmail = (val: string) => {
-    return /^[^\s@]+@(naver\.com|daum\.net|gmail\.com|hanmail\.net|nate\.com|hotmail\.com|yahoo\.co\.kr|outlook\.com|kakao\.com|com|net|kr|co\.kr|ac\.kr|go\.kr|or\.kr)$/i.test(
-      val,
-    );
+    const email = val.trim();
+    const allowedDomains = [
+      "naver.com",
+      "daum.net",
+      "gmail.com",
+      "hanmail.net",
+      "nate.com",
+      "hotmail.com",
+      "outlook.com",
+      "kakao.com",
+    ];
+    const match = email.match(/^[^\s@]+@([^\s@]+)$/);
+    if (!match) return false;
+    return allowedDomains.includes(match[1].toLowerCase());
   };
 
   const handleInputChange =
@@ -96,11 +110,19 @@ export default function SignUpForm() {
 
     setLoading(true);
 
-    const { error } = await supabase.auth.signUp({ email, password });
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
 
     setLoading(false);
 
     if (error) {
+      if (error.message.toLowerCase().includes("rate limit")) {
+        setOpenRateLimitModal(true);
+        return;
+      }
+
       addToast("회원가입 실패: " + error.message, "error");
       return;
     }
@@ -111,17 +133,28 @@ export default function SignUpForm() {
 
   return (
     <>
-      {/* noValidate로 브라우저 기본 메시지 제거 */}
       <form onSubmit={handleSignUp} autoComplete="off" noValidate>
         <Flex direction="column" gap={16} className={styles.SignUpForm}>
-          <Input
-            type="email"
-            name="email"
-            autoComplete="email"
-            placeholder="이메일"
-            value={email}
-            onChange={handleInputChange(setEmail)}
-          />
+          <Icon icon="pen-to-square" className={styles.ico} />
+
+          <Flex direction="column" gap={4}>
+            <Input
+              type="email"
+              name="email"
+              autoComplete="email"
+              placeholder="이메일"
+              value={email}
+              onChange={handleInputChange(setEmail)}
+            />
+            <Flex gap={6}>
+              <Text size="xs" weight="bold" color="secondary">
+                사용 가능 이메일
+              </Text>
+              <Text size="xs" color="info">
+                네이버, 구글(Gmail), 다음, 카카오, 네이트, 아웃룩
+              </Text>
+            </Flex>
+          </Flex>
 
           <div className={styles.passwordField}>
             <Input
@@ -198,6 +231,7 @@ export default function SignUpForm() {
         </Flex>
       </form>
 
+      {/* 약관 / 개인정보 모달 */}
       <Modal
         open={openModal}
         onClose={() => setOpenModal(false)}
@@ -212,6 +246,28 @@ export default function SignUpForm() {
           {modalContent === "terms" && <TermsPage />}
           {modalContent === "privacy" && <PrivacyPage />}
         </div>
+      </Modal>
+
+      {/* 가입 제한 안내 모달 */}
+      <Modal
+        open={openRateLimitModal}
+        onClose={() => setOpenRateLimitModal(false)}
+        header={<Title level={4}>가입 제한 안내</Title>}
+        footer={
+          <Button onClick={() => setOpenRateLimitModal(false)}>확인</Button>
+        }
+      >
+        <Flex direction="column" gap={20}>
+          <Icon icon="circle-question" className="ico" />
+          <Flex direction="column" gap={8}>
+            <Text size="sm" color="secondary">
+              잠시 동안 가입 시도가 많아 제한되었습니다.
+            </Text>
+            <Text size="sm" color="secondary">
+              잠시 후 다시 시도하거나 다른 이메일을 사용해주세요.
+            </Text>
+          </Flex>
+        </Flex>
       </Modal>
     </>
   );

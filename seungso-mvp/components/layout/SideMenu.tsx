@@ -1,23 +1,43 @@
-"use client";
 import Icon from "@/components/ui/Icon";
 import { MenuItem } from "@/lib/menu";
-import { config } from "@fortawesome/fontawesome-svg-core";
-import "@fortawesome/fontawesome-svg-core/styles.css";
 import Link from "next/link";
-config.autoAddCss = false;
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import styles from "./SideMenu.module.scss";
 
-export default function SideMenu({
-  menu,
-  onClose,
-}: {
+type SideMenuProps = {
   menu: MenuItem[];
   onClose: () => void;
-}) {
+};
+
+export default function SideMenu({ menu, onClose }: SideMenuProps) {
+  const [visible, setVisible] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setVisible(true), 10);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  const handleClose = () => {
+    setVisible(false);
+    setTimeout(onClose, 300);
+  };
+
   const renderMenu = (items: MenuItem[]) => (
     <ul>
       {items.map((item) => (
-        <li key={item.path}>
-          <Link href={item.path}>{item.name}</Link>
+        <li
+          key={item.name}
+          className={pathname === item.path ? styles.active : ""}
+        >
+          {item.path ? (
+            <Link href={item.path} onClick={handleClose}>
+              {item.name}
+            </Link>
+          ) : (
+            <b>{item.name}</b>
+          )}
           {item.children && renderMenu(item.children)}
         </li>
       ))}
@@ -25,9 +45,17 @@ export default function SideMenu({
   );
 
   return (
-    <nav className="sideMenu" aria-label="전체 메뉴">
-      <Icon icon="xmark" aria-label="닫기" onClick={onClose} />
-      {renderMenu(menu)}
-    </nav>
+    <div
+      className={`${styles.overlay} ${visible ? styles.show : ""}`}
+      onClick={handleClose}
+    >
+      <div
+        className={`${styles.menu} ${visible ? styles.show : ""}`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Icon icon="xmark" aria-label="닫기" onClick={handleClose} />
+        {renderMenu(menu)}
+      </div>
+    </div>
   );
 }

@@ -4,7 +4,9 @@ import { supabase } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
 
 import Button from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
 import Flex from "@/components/ui/Flex";
+import Icon from "@/components/ui/Icon";
 import Input from "@/components/ui/Input";
 import Text from "@/components/ui/Text";
 import Title from "@/components/ui/Title";
@@ -63,31 +65,45 @@ export default function ChangeEmailForm() {
 
   return (
     <form onSubmit={handleChangeEmail} className={styles.changeEmailForm}>
-      <Title level={2}>이메일 변경</Title>
+      <Flex direction="column" align="center" className={styles.MemberWrap}>
+        <Title level={1}>이메일 변경</Title>
 
-      <Flex direction="column" gap={12}>
-        {/* 현재 이메일 (disabled지만 onChange는 필요함) */}
-        <Input
-          type="email"
-          value={currentEmail}
-          placeholder="현재 이메일"
-          disabled
-          onChange={() => {}}
-        />
+        <Card className={styles.LoginCard}>
+          <Icon icon="envelope-circle-check" className={styles.ico} />
 
-        <Input
-          type="email"
-          placeholder="새 이메일"
-          value={newEmail}
-          onChange={(e) => setNewEmail(e.target.value)}
-          required
-        />
+          <Flex direction="column" gap={16}>
+            <Flex direction="column" align="flex-start" gap={2}>
+              <Input
+                type="email"
+                value={currentEmail}
+                placeholder="현재 이메일"
+                disabled
+                onChange={() => {}}
+                style={{ width: "100%" }}
+              />
+              <Text size="xs" weight="bold" color="primary">
+                이메일 변경 시, 기존 이메일과 새 이메일로 확인 메일이
+                전송됩니다.
+              </Text>
+            </Flex>
 
-        <Text size="sm">
-          이메일 변경 시, 기존 이메일과 새 이메일로 확인 메일이 전송됩니다.
-        </Text>
+            <Input
+              type="email"
+              placeholder="새 이메일"
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+              required
+            />
+          </Flex>
+        </Card>
 
-        <Button type="submit" fullWidth disabled={loading}>
+        <Button
+          type="submit"
+          styleType="primary"
+          size="lg"
+          style={{ width: "420px" }}
+          disabled={loading}
+        >
           {loading ? "변경 중..." : "이메일 변경하기"}
         </Button>
 

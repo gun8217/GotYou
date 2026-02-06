@@ -1,4 +1,5 @@
 @use "@/app/styles/variables" as *;
+@use "@/app/styles/mixins" as *;
 
 .MemberWrap {
   min-height: $content-height-full;
@@ -11,18 +12,27 @@
 
 .SignUpInfo {
   .ico {
-    font-size: 150px;
+    margin: $spacing-10 0 $spacing-6;
+    font-size: 8rem;
     color: $color-gray-300;
   }
 }
+
 .SignUpBtn {
   margin-top: $spacing-8;
 }
 
 .SignUpForm {
-  width: $min-width;
-  margin: $spacing-16 $inner-margin-x 0;
+  @include max-fixed-container;
+  margin-top: $spacing-16;
   padding: 0 130px;
+
+  .ico {
+    margin: -$spacing-3 0 $spacing-5;
+    font-size: 7rem;
+    color: $color-gray-300;
+  }
+
   .passwordField {
     position: relative;
     .eyeIcon {
@@ -47,8 +57,18 @@
 
 .LoginCard {
   width: 420px;
-  margin: $spacing-6 $inner-margin-x $spacing-16;
+  margin: $spacing-4 $inner-margin-x $spacing-16;
+  .ico {
+    margin-bottom: $spacing-5;
+    font-size: 5rem;
+    color: $color-gray-300;
+  }
   .topMsg {
     margin-bottom: $spacing-5;
   }
+}
+
+.forgotInfo {
+  width: 420px;
+  margin-top: $spacing-8;
 }

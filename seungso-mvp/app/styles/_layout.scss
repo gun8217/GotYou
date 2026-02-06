@@ -1,4 +1,5 @@
 @use "@/app/styles/variables" as *;
+@use "@/app/styles/mixins" as *;
 
 body {
   min-width: $min-width;
@@ -17,12 +18,9 @@ header {
   box-shadow: $shadow-white-lg;
   inset: 0;
   background: $color-white;
-  // background: linear-gradient(135deg, #1e4db3 50%, #4ba3f7 90%, #3fcabc 100%);
-  // animation: gradientMove 3s ease infinite;
   z-index: $z-index-fixed;
   .inner {
-    max-width: $inner-width;
-    margin: 0 $inner-margin-x;
+    @include max-container;
   }
   nav {
     display: flex;
@@ -36,7 +34,6 @@ header {
       letter-spacing: $font-spacing-2xl;
       color: $color-primary;
       font-weight: $font-weight-bold;
-      /* 그림자는 너무 진하면 촌스러울 수 있으니 아주 투명하게 조절하세요 */
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
       span {
         display: block;
@@ -56,35 +53,14 @@ header {
         display: inline-block;
         padding: $spacing-1 $spacing-2;
         color: $color-gray-700;
-        opacity: 0.65;
+        opacity: 0.75;
         transition: all $transition-fast;
-        svg {
-          transition: all 0.3s ease-in-out;
-          margin-right: $spacing-2;
-        }
         &:hover {
           opacity: 1;
-          transform: scale(1.05);
-          svg {
-            transform: scale(1.2);
-          }
+          font-weight: 500;
         }
       }
     }
-  }
-}
-
-nav.sideMenu {
-  position: fixed;
-  top: 48px;
-  right: 0;
-  bottom: 0;
-  min-width: 300px;
-  border-left: $color-border-default 1px solid;
-  background: #fff;
-  box-shadow: $shadow-sm;
-  & > ul li li {
-    padding-left: 10px;
   }
 }
 

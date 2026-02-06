@@ -28,6 +28,7 @@ type InputProps = {
   max?: number;
   step?: number;
   autoComplete?: string;
+  style?: React.CSSProperties;
 };
 
 export default function Input({
@@ -45,9 +46,10 @@ export default function Input({
   max,
   step,
   autoComplete,
+  style,
 }: InputProps) {
   return (
-    <div className={styles.inputWrapper}>
+    <div className={styles.inputWrapper} style={style}>
       {label && (
         <label className={styles.label}>
           {label}

@@ -21,7 +21,8 @@ export default function SignUpSteps() {
       content: (
         <>
           <Flex direction="column" gap={8} className={styles.SignUpInfo}>
-            <Text className={styles.ico}>⚠</Text>
+            <Icon icon="triangle-exclamation" className={styles.ico} />
+
             <Text color="info">이메일 주소가 곧 아이디가 됩니다.</Text>
             <Text color="info">
               보안상 가입 이메일은 별도로 안내되지 않습니다.

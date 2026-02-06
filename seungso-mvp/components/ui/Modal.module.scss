@@ -11,7 +11,7 @@
 }
 
 .modal {
-  min-width: 300px;
+  min-width: 420px;
   max-width: $inner-width;
   padding: $spacing-5 0 0;
   border-radius: $radius-md;
@@ -39,20 +39,20 @@
   .body {
     overflow: auto;
     max-height: calc(100vh - 500px);
-    padding: $spacing-5 $spacing-5 $spacing-10;
+    padding: $spacing-8 $spacing-5 $spacing-8;
   }
 
   .body::-webkit-scrollbar {
-    width: 12px;
+    width: 6px;
   }
   .body::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 6px;
-    border: 3px solid #f1f1f1;
+    background-color: $color-gray-500;
+    border-radius: $radius-lg;
+    border: $color-gray-300 1px solid;
   }
   .body::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 6px;
+    background: $color-gray-100;
+    border-radius: $radius-lg;
   }
 
   .footer {

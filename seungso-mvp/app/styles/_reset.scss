@@ -1,20 +1,15 @@
-/* ========================================
-   Reset / Base
-   ======================================== */
+@use "@/app/styles/variables" as *;
 
-/* 1. Box sizing */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* 1-1. 모바일 탭 하이라이트 제거 */
 * {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* 2. Remove default margin & padding */
 html,
 body,
 div,
@@ -104,7 +99,6 @@ video {
   vertical-align: baseline;
 }
 
-/* 3. HTML5 display-role reset */
 article,
 aside,
 details,
@@ -119,7 +113,6 @@ section {
   display: block;
 }
 
-/* 4. Base line-height */
 body {
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -129,39 +122,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 5. Lists */
 ol,
 ul {
   list-style: none;
 }
 
-/* 6. Quotes */
-blockquote,
-q {
-  quotes: none;
-}
-
-blockquote::before,
-blockquote::after,
-q::before,
-q::after {
-  content: "";
-  content: none;
-}
-
-/* 7. Tables */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* 8. Anchor */
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* 9. Images & media */
 img,
 picture,
 video,
@@ -171,11 +141,17 @@ svg {
   max-width: 100%;
 }
 
-/* 10. Form elements */
+a {
+  color: $color-link;
+  text-decoration: none;
+  transition: all $transition-base;
+  &:hover {
+    color: $color-link-hover;
+  }
+}
 button {
   cursor: pointer;
 }
-
 /* Remove default button styles (Safari/iOS) */
 button,
 [type="button"],
@@ -185,28 +161,20 @@ button,
   -webkit-appearance: none;
 }
 
-/* input search */
-input[type="search"] {
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-/* select */
+/* form */
+// input[type="search"] {
+//   -webkit-appearance: none;
+//   appearance: none;
+// }
 select {
-  appearance: auto; /* 또는 none, 디자인에 따라 */
+  appearance: auto;
 }
-
-/* Textarea resize */
 textarea {
   resize: vertical;
 }
-
-/* 11. Hidden */
 [hidden] {
   display: none !important;
 }
-
-/* 12. Accessibility */
 :focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 2px;

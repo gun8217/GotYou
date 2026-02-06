@@ -1,19 +1,20 @@
 "use client";
 
+import { useToast } from "@/components/ui/ToastProvider";
 import { supabase } from "@/lib/supabase/client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import Button from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
+import Checkbox from "@/components/ui/Checkbox";
 import Flex from "@/components/ui/Flex";
+import Icon from "@/components/ui/Icon";
 import Input from "@/components/ui/Input";
 import Text from "@/components/ui/Text";
 import Title from "@/components/ui/Title";
-import { useToast } from "@/components/ui/ToastProvider";
 import Link from "next/link";
 
-import Card from "@/components/ui/Card";
-import Checkbox from "@/components/ui/Checkbox";
 import styles from "../MemberCommon.module.scss";
 
 const REMEMBER_EMAIL_KEY = "remembered_email";
@@ -32,12 +33,13 @@ export default function LoginForm() {
 
   const [email, setEmail] = useState(initialEmail);
   const [rememberEmail, setRememberEmail] = useState(!!initialEmail);
-
   const [password, setPassword] = useState("");
-  const toast = useToast();
   const [loading, setLoading] = useState(false);
   const [showResend, setShowResend] = useState(false);
 
+  const toast = useToast();
+
+  // emailParam 제거
   useEffect(() => {
     if (emailParam) {
       const newParams = new URLSearchParams(searchParams.toString());
@@ -73,16 +75,28 @@ export default function LoginForm() {
         password,
       });
 
+      setLoading(false);
+
       if (error) {
-        setLoading(false);
-        toast.addToast(
-          "로그인할 수 없습니다. 이메일 인증 여부를 확인해주세요.",
-          "error",
-        );
-        setShowResend(true);
+        // 이메일 미인증일 때
+        if (error.message.toLowerCase().includes("email not confirmed")) {
+          toast.addToast(
+            "이메일 인증이 필요합니다. 인증 메일을 확인해주세요.",
+            "error",
+          );
+          setShowResend(true); // 인증 재전송 버튼 표시
+        } else {
+          // 일반 로그인 실패 (비밀번호 틀림 등)
+          toast.addToast(
+            "로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.",
+            "error",
+          );
+          setShowResend(false); // 인증 재전송 버튼 숨김
+        }
         return;
       }
 
+      // 로그인 성공
       if (rememberEmail) {
         localStorage.setItem(REMEMBER_EMAIL_KEY, email);
       } else {
@@ -90,11 +104,10 @@ export default function LoginForm() {
       }
 
       toast.addToast("로그인 성공! 환영합니다.", "success");
-      router.push("/cases");
+      router.push("/about");
     } catch {
-      toast.addToast("알 수 없는 오류가 발생했습니다.", "error");
-    } finally {
       setLoading(false);
+      toast.addToast("알 수 없는 오류가 발생했습니다.", "error");
     }
   };
 
@@ -125,12 +138,13 @@ export default function LoginForm() {
         <Title level={1}>로그인</Title>
 
         <Card className={styles.LoginCard}>
+          <Icon icon="user-check" className={styles.ico} />
+
           {reason === "idle" && (
             <Text size="sm" color="error" className={styles.topMsg}>
               10분 동안 활동이 없어 보안을 위해 자동 로그아웃되었습니다.
             </Text>
           )}
-
           {emailParam && !reason && (
             <Text size="sm" color="primary" className={styles.topMsg}>
               확인된 계정 정보가 입력되었습니다. 비밀번호를 입력해 주세요.
@@ -172,6 +186,7 @@ export default function LoginForm() {
             type="submit"
             styleType="primary"
             size="lg"
+            style={{ width: "420px" }}
             disabled={loading}
           >
             {loading ? "로그인 중..." : "로그인"}
@@ -181,6 +196,7 @@ export default function LoginForm() {
             type="button"
             styleType="primary"
             size="lg"
+            style={{ width: "420px" }}
             onClick={handleResendVerification}
           >
             인증 메일 재전송

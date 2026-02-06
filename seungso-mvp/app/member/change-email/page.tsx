@@ -1,5 +1,7 @@
 import ChangeEmailForm from "./ChangeEmailForm";
 
+export const pageName = "이메일 변경";
+
 export const metadata = {
   title: "이메일 변경",
   description: "승소환전소의 이메일 변경 페이지입니다.",

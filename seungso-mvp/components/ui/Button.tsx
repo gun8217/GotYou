@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { CSSProperties } from "react";
 import styles from "./Button.module.scss";
 
 type ButtonProps = {
@@ -17,6 +17,7 @@ type ButtonProps = {
   fullWidth?: boolean;
   disabled?: boolean;
   className?: string;
+  style?: CSSProperties;
 };
 
 export default function Button({
@@ -28,6 +29,7 @@ export default function Button({
   fullWidth = false,
   disabled = false,
   className = "",
+  style = {},
 }: ButtonProps) {
   return (
     <button
@@ -41,6 +43,7 @@ export default function Button({
         ${fullWidth ? styles.fullWidth : ""} 
         ${className}
       `.trim()}
+      style={style}
     >
       {children}
     </button>

@@ -6,7 +6,7 @@ type BaseProps = {
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
   weight?: "normal" | "bold" | "light";
   color?: "default" | "primary" | "secondary" | "info" | "error";
-  as?: "p" | "span" | "div" | "button";
+  as?: "div" | "p" | "span" | "b" | "strong" | "button";
 };
 
 type TextProps = BaseProps &

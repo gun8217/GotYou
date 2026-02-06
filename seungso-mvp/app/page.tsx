@@ -1,275 +1,110 @@
 "use client";
 
 import Button from "@/components/ui/Button";
-import {
-  AnimatePresence,
-  motion,
-  TargetAndTransition,
-  Variants,
-} from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import "animate.css";
+import { useEffect, useRef } from "react";
 import styles from "./HeroSection.module.scss";
 
 export default function HeroSection() {
-  const [rippleKey, setRippleKey] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // -----------------------
-  // Ripple 업데이트
-  // -----------------------
-  useEffect(() => {
-    const interval = setInterval(() => setRippleKey((prev) => prev + 1), 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // -----------------------
-  // 랜덤 물감 캔버스
-  // -----------------------
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    const dpr = Math.min(window.devicePixelRatio, 1.5);
+
+    const resize = () => {
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = "100%";
+      canvas.style.height = "100%";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      drawOnce();
     };
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
 
-    const colors = [
-      "#1E3A8A",
-      "#3B82F6",
-      "#60A5FA",
-      "#fffb00",
-      "#93C5FD",
-      "#E0F2FE",
-    ];
+    const colors = ["#191cdb", "#097697", "#25ad2e", "#e8ec66"];
 
-    type Particle = {
+    type Blob = {
       x: number;
       y: number;
       radius: number;
       color: string;
-      life: number;
-      maxLife: number;
-      scale: number;
-      alpha: number;
-      blur: number;
     };
 
-    const particles: Particle[] = [];
+    const blobs: Blob[] = [];
 
-    const createParticle = (initialVisible = false): Particle => {
-      const scale = 0.5 + Math.random() * 0.3;
-      return {
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 150 + 100,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        life: 0,
-        maxLife: 10 + Math.random() * 10,
-        scale: initialVisible ? 1 : scale,
-        alpha: initialVisible ? 1 : 0,
-        blur: 0,
-      };
-    };
+    const createBlob = (): Blob => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      radius: Math.random() * 300 + 250,
+      color: colors[Math.floor(Math.random() * colors.length)],
+    });
 
-    for (let i = 0; i < 15; i++) particles.push(createParticle(true));
+    for (let i = 0; i < 4; i++) blobs.push(createBlob());
 
-    const draw = () => {
+    const drawOnce = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      particles.forEach((p, index) => {
-        p.life += 0.016;
-        const lifeRatio = p.life / p.maxLife;
-
-        // 생존 종료 후 랜덤 재생성
-        if (lifeRatio >= 1) {
-          if (Math.random() < 0.3) particles[index] = createParticle();
-          return;
-        }
-
-        // --------------------
-        // 부드러운 scale, alpha, blur
-        // --------------------
-        const targetScale = lifeRatio < 0.2 ? 1 : lifeRatio > 0.8 ? 1.2 : 1;
-        p.scale += (targetScale - p.scale) * 0.05;
-
-        const targetAlpha = lifeRatio < 0.8 ? 1 : 0;
-        p.alpha += (targetAlpha - p.alpha) * 0.05;
-
-        const targetBlur = lifeRatio > 0.8 ? (lifeRatio - 0.8) * 2 : 0;
-        p.blur += (targetBlur - p.blur) * 0.05;
-
+      blobs.forEach((b) => {
         const gradient = ctx.createRadialGradient(
-          p.x,
-          p.y,
+          b.x,
+          b.y,
           0,
-          p.x,
-          p.y,
-          p.radius * p.scale,
+          b.x,
+          b.y,
+          b.radius,
         );
-        gradient.addColorStop(0, p.color + "50");
-        gradient.addColorStop(1, p.color + "07");
+        gradient.addColorStop(0, b.color + "40");
+        gradient.addColorStop(1, b.color + "05");
 
         ctx.fillStyle = gradient;
-        ctx.globalAlpha = p.alpha;
-        ctx.filter = `blur(${p.blur}px)`;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius * p.scale, 0, Math.PI * 2);
+        ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
         ctx.fill();
-        ctx.globalAlpha = 1;
-        ctx.filter = "none";
       });
     };
 
-    const loop = () => {
-      draw();
-      requestAnimationFrame(loop);
-    };
-    loop();
+    resize();
+    window.addEventListener("resize", resize);
 
-    return () => window.removeEventListener("resize", resizeCanvas);
+    return () => window.removeEventListener("resize", resize);
   }, []);
-
-  // -----------------------
-  // Wave text & Ripple
-  // -----------------------
-  const WAVE_DURATION = 1.2;
-  const TOTAL_CYCLE_TIME = 10;
-  const START_AFTER_ALL = 6.5;
-  const HIGHLIGHT_COLOR = "#0284c7";
-
-  const containerVariants: Variants = {
-    visible: { transition: { staggerChildren: 0.2 } },
-  };
-  const itemLeft: Variants = {
-    hidden: { opacity: 0, x: -50 }, // 시작 위치: 왼쪽 밖
-    visible: {
-      opacity: 1,
-      x: 0, // 최종 위치
-      transition: { duration: 1, ease: "easeOut" },
-    },
-  };
-  const itemRight: Variants = {
-    hidden: { opacity: 0, x: 100 }, // 시작 위치: 오른쪽 밖
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
-  };
-  const itemUp: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 2, delay: 1.5 } },
-  };
-
-  const renderWaveText = (
-    text: string,
-    highlight: string,
-    waveSequenceDelay: number,
-  ) => {
-    const startIndex = text.indexOf(highlight);
-    const endIndex = startIndex + highlight.length;
-
-    return text.split("").map((char, index) => {
-      const isHighlightedZone = index >= startIndex && index < endIndex;
-      const waveAnim: TargetAndTransition = {
-        y: [0, -10, 0],
-        transition: {
-          duration: WAVE_DURATION,
-          repeat: Infinity,
-          repeatDelay: TOTAL_CYCLE_TIME - WAVE_DURATION,
-          delay: START_AFTER_ALL + waveSequenceDelay + index * 0.1,
-          ease: "easeInOut",
-        },
-      };
-      return (
-        <motion.span
-          key={index}
-          animate={isHighlightedZone ? waveAnim : {}}
-          style={{
-            display: "inline-block",
-            whiteSpace: "pre",
-            color: isHighlightedZone ? HIGHLIGHT_COLOR : "inherit",
-            fontWeight: isHighlightedZone ? "700" : "inherit",
-            fontSize: isHighlightedZone ? "2.5rem" : "inherit",
-            textShadow: isHighlightedZone
-              ? "0px 0px 4px rgba(255,255,255,0.7)"
-              : "none",
-          }}
-        >
-          {char}
-        </motion.span>
-      );
-    });
-  };
 
   return (
     <section className={styles.hero}>
-      {/* 랜덤 물감 캔버스 */}
       <canvas
         ref={canvasRef}
         style={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
+          inset: 0,
           zIndex: 0,
-          filter: "saturate(1.5) brightness(0.8)",
+          filter: "saturate(5) brightness(2)",
         }}
       />
 
       {/* Ripple */}
-      <div className={styles.canvasContainer}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={rippleKey}
-            initial={{ scale: 0, opacity: 0, x: "-50%", y: "-50%" }}
-            animate={{ scale: 4, opacity: [0, 0.5, 0] }}
-            transition={{ duration: 4, ease: "easeOut" }}
-            className={styles.ripple}
-            style={{
-              left: "50%",
-              top: "70vh",
-              position: "absolute",
-              zIndex: 1,
-            }}
-          />
-        </AnimatePresence>
-      </div>
+      <div className={styles.ripple}></div>
 
-      {/* 텍스트 */}
-      <motion.div
-        className={styles.introSection}
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        style={{ position: "relative", zIndex: 2 }}
-      >
-        <motion.p className={styles.introText} variants={itemLeft}>
-          {renderWaveText(
-            "승소판결문이 더 이상 종이조각이 되지 않도록",
-            "승소판결문",
-            0,
-          )}
-        </motion.p>
+      <div className={styles.introSection}>
+        <p
+          className={`${styles.introText} animate__animated animate__fadeInLeft`}
+        >
+          <strong>승소판결문</strong>이 더 이상 종이조각이 되지 않도록
+        </p>
 
-        <motion.p className={styles.introText} variants={itemRight}>
-          {renderWaveText(
-            "법적 권리를 실질적 삶의 권리로 연결합니다.",
-            "실질적 삶의 권리",
-            2.2,
-          )}
-        </motion.p>
+        <p
+          className={`${styles.introText} animate__animated animate__fadeInRight`}
+        >
+          법적 권리를 <strong>실질적 삶의 권리</strong>로 연결합니다.
+        </p>
 
-        <motion.div variants={itemUp}>
+        <div className={`animate__animated animate__fadeInUp`}>
           <Button className={styles.mainBtn}>서비스 둘러보기</Button>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

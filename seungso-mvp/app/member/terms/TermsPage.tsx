@@ -5,6 +5,8 @@ import Title from "@/components/ui/Title";
 
 import styles from "../MemberCommon.module.scss";
 
+export const pageName = "서비스 이용약관";
+
 export default function TermsPage() {
   return (
     <div className={styles.terms}>

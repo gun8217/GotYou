@@ -1,4 +1,5 @@
 import "@/app/globals.scss";
+import { AuthProvider } from "@/components/auth/AuthContext"; // ✅ AuthProvider import
 import ClientLayout from "@/components/layout/ClientLayout";
 import FontAwesomeConfig from "@/components/layout/FontAwesomeConfig";
 import Header from "@/components/layout/Header";
@@ -30,15 +31,19 @@ export default function RootLayout({
         <FontAwesomeConfig />
       </head>
       <body>
-        <ThemeWrapper>
-          <ToastProvider>
-            <ClientLayout>
-              <Header menu={menu} />
-              <main>{children}</main>
-              <footer>Copyright ⓒ 2026 승소환전소.</footer>
-            </ClientLayout>
-          </ToastProvider>
-        </ThemeWrapper>
+        <AuthProvider>
+          {" "}
+          {/* ✅ 인증 컨텍스트 적용 */}
+          <ThemeWrapper>
+            <ToastProvider>
+              <ClientLayout>
+                <Header menu={menu} />
+                <main>{children}</main>
+                <footer>Copyright ⓒ 2026 승소환전소.</footer>
+              </ClientLayout>
+            </ToastProvider>
+          </ThemeWrapper>
+        </AuthProvider>
       </body>
     </html>
   );

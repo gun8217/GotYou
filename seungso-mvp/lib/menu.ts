@@ -1,18 +1,37 @@
-// lib/menu.ts
 import fs from "fs";
 import path from "path";
 
 export type MenuItem = {
   name: string;
-  path: string;
+  path?: string;
   children?: MenuItem[];
+  pageOrder?: number;
+  pageTitle?: string;
+  requiresAuth?: boolean;
 };
 
-function extractPageName(filePath: string): string | null {
-  if (!fs.existsSync(filePath)) return null;
+function extractPageInfo(filePath: string): Partial<MenuItem> {
+  if (!fs.existsSync(filePath)) return {};
+
   const content = fs.readFileSync(filePath, "utf-8");
-  const match = content.match(/export const pageName\s*=\s*["'](.+)["']/);
-  return match ? match[1] : null;
+
+  const nameMatch = content.match(
+    /export const pageName\s*=\s*["']([^"']+)["'];?/,
+  );
+  const titleMatch = content.match(
+    /export const pageTitle\s*=\s*["']([^"']+)["'];?/,
+  );
+  const orderMatch = content.match(/export const pageOrder\s*=\s*(\d+);?/);
+  const authMatch = content.match(
+    /export const requiresAuth\s*=\s*(true|false);?/,
+  );
+
+  return {
+    name: nameMatch ? nameMatch[1] : undefined,
+    pageTitle: titleMatch ? titleMatch[1] : undefined,
+    pageOrder: orderMatch ? Number(orderMatch[1]) : undefined,
+    requiresAuth: authMatch ? authMatch[1] === "true" : undefined,
+  };
 }
 
 export function getMenuItems(baseDir = "app"): MenuItem[] {
@@ -20,7 +39,6 @@ export function getMenuItems(baseDir = "app"): MenuItem[] {
   if (!fs.existsSync(dirPath)) return [];
 
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
-
   const items: MenuItem[] = [];
 
   for (const entry of entries) {
@@ -28,22 +46,31 @@ export function getMenuItems(baseDir = "app"): MenuItem[] {
 
     const subDir = path.join(baseDir, entry.name);
     const pageFile = path.join(process.cwd(), subDir, "page.tsx");
-    const pageName = extractPageName(pageFile);
 
+    const pageInfo = extractPageInfo(pageFile);
     const children = getMenuItems(subDir);
 
-    // pageName이 있는 경우만 포함
-    if (pageName) {
+    const hasAnyProp =
+      pageInfo.name ||
+      pageInfo.pageTitle ||
+      pageInfo.pageOrder !== undefined ||
+      pageInfo.requiresAuth !== undefined;
+
+    if (hasAnyProp) {
+      const urlPath = subDir.replace(/^app[\\/]/, "").replace(/\\/g, "/");
+
       items.push({
-        name: pageName,
-        path: `/${entry.name}`,
+        name: pageInfo.name || pageInfo.pageTitle || entry.name,
+        path: pageInfo.name ? `/${urlPath}` : undefined,
+        pageOrder: pageInfo.pageOrder,
+        pageTitle: pageInfo.pageTitle,
+        requiresAuth: pageInfo.requiresAuth,
         children: children.length > 0 ? children : undefined,
       });
-    } else if (children.length > 0) {
-      // 상위에 pageName은 없지만 하위에 유효한 메뉴가 있으면 children만 노출
-      items.push(...children);
     }
   }
+
+  items.sort((a, b) => (a.pageOrder ?? 0) - (b.pageOrder ?? 0));
 
   return items;
 }

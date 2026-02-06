@@ -1,4 +1,5 @@
 @use "@/app/styles/variables" as *;
+@use "@/app/styles/mixins" as *;
 
 .tabWrap {
   width: 100%;
@@ -10,8 +11,7 @@
       position: relative;
       display: flex;
       gap: $spacing-2;
-      max-width: $inner-width;
-      margin: 0 $inner-margin-x;
+      @include max-container;
     }
     .tab {
       position: relative;
@@ -39,8 +39,7 @@
       transition: all $transition-base;
     }
     & + div {
-      max-width: $inner-width;
-      margin: 0 $inner-margin-x;
+      @include max-container;
     }
   }
 

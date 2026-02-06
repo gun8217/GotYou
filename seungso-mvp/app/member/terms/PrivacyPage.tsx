@@ -5,6 +5,8 @@ import Title from "@/components/ui/Title";
 
 import styles from "../MemberCommon.module.scss";
 
+export const pageName = "개인정보 수집 및 이용 안내";
+
 export default function PrivacyPage() {
   return (
     <div className={styles.terms}>
