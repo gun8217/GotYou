@@ -1,3 +1,5 @@
+export const pageName = "신용정보 조회 안내";
+
 export default function CreditInfoServicePage() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-12 text-gray-900">

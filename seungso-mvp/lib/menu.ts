@@ -26,6 +26,12 @@ function extractPageInfo(filePath: string): Partial<MenuItem> {
     /export const requiresAuth\s*=\s*(true|false);?/,
   );
 
+  console.log("Extracting page info from:", filePath); // 경로 확인
+  console.log("pageName:", nameMatch ? nameMatch[1] : "Not Found");
+  console.log("pageTitle:", titleMatch ? titleMatch[1] : "Not Found");
+  console.log("pageOrder:", orderMatch ? orderMatch[1] : "Not Found");
+  console.log("requiresAuth:", authMatch ? authMatch[1] : "Not Found");
+
   return {
     name: nameMatch ? nameMatch[1] : undefined,
     pageTitle: titleMatch ? titleMatch[1] : undefined,

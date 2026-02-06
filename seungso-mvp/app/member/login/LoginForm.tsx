@@ -39,7 +39,6 @@ export default function LoginForm() {
 
   const toast = useToast();
 
-  // emailParam 제거
   useEffect(() => {
     if (emailParam) {
       const newParams = new URLSearchParams(searchParams.toString());
@@ -70,39 +69,56 @@ export default function LoginForm() {
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
-      setLoading(false);
-
       if (error) {
-        // 이메일 미인증일 때
+        setLoading(false);
         if (error.message.toLowerCase().includes("email not confirmed")) {
           toast.addToast(
             "이메일 인증이 필요합니다. 인증 메일을 확인해주세요.",
             "error",
           );
-          setShowResend(true); // 인증 재전송 버튼 표시
+          setShowResend(true);
         } else {
-          // 일반 로그인 실패 (비밀번호 틀림 등)
           toast.addToast(
             "로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.",
             "error",
           );
-          setShowResend(false); // 인증 재전송 버튼 숨김
+          setShowResend(false);
         }
         return;
       }
 
-      // 로그인 성공
+      const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("is_active")
+        .eq("user_id", data.user.id)
+        .single();
+
+      if (profileError) {
+        setLoading(false);
+        toast.addToast("사용자 정보를 불러오지 못했습니다.", "error");
+        return;
+      }
+
+      if (profile.is_active === false) {
+        await supabase.auth.signOut();
+        setLoading(false);
+        toast.addToast("이미 탈퇴 처리된 계정입니다.", "error");
+        router.replace("/");
+        return;
+      }
+
       if (rememberEmail) {
         localStorage.setItem(REMEMBER_EMAIL_KEY, email);
       } else {
         localStorage.removeItem(REMEMBER_EMAIL_KEY);
       }
 
+      setLoading(false);
       toast.addToast("로그인 성공! 환영합니다.", "success");
       router.push("/about");
     } catch {

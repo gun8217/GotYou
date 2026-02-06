@@ -32,8 +32,6 @@ export default function RootLayout({
       </head>
       <body>
         <AuthProvider>
-          {" "}
-          {/* ✅ 인증 컨텍스트 적용 */}
           <ThemeWrapper>
             <ToastProvider>
               <ClientLayout>

@@ -1,4 +1,3 @@
-// app/about/page.tsx
 export const pageName = "소개";
 
 export default function AboutPage() {
