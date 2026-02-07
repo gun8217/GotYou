@@ -22,3 +22,10 @@
   width: 100%;
   margin: 0 $inner-margin-x;
 }
+
+@mixin contentsPage-container {
+  max-width: $inner-width;
+  width: 100%;
+  margin: 0 $inner-margin-x;
+  padding: 30px;
+}

@@ -59,7 +59,7 @@ export default function WithdrawForm() {
   return (
     <>
       <Flex direction="column" gap={16} className={styles.SignUpForm}>
-        <Icon icon="triangle-exclamation" className={styles.ico} />
+        <Icon icon="user-xmark" className={styles.ico} />
 
         <Text color="error" weight="bold">
           탈퇴 시 계정은 즉시 비활성화되며 법령에 따라 5년간 보관 후 삭제됩니다.

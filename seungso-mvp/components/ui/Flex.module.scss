@@ -5,4 +5,8 @@
   .flex1 {
     flex: 1;
   }
+  &.titLine {
+    padding-bottom: $spacing-3;
+    border-bottom: $color-border-title 1px solid;
+  }
 }

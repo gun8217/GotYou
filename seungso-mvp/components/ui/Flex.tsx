@@ -1,6 +1,5 @@
 "use client";
 import { CSSProperties, ReactNode } from "react";
-
 import styles from "./Flex.module.scss";
 
 type FlexProps = {
@@ -15,7 +14,7 @@ type FlexProps = {
   align?: "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
   gap?: number;
   wrap?: "nowrap" | "wrap" | "wrap-reverse";
-  className?: string;
+  className?: keyof typeof styles;
   style?: CSSProperties;
 };
 
@@ -25,12 +24,12 @@ export default function Flex({
   justify,
   align,
   gap = 0,
-  className = "",
+  className,
   style = {},
 }: FlexProps) {
   return (
     <div
-      className={`${styles.flex} ${className}`}
+      className={`${styles.flex} ${className ? styles[className] : ""}`}
       style={{
         flexDirection: direction,
         justifyContent: justify,

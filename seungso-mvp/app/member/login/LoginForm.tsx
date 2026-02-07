@@ -25,6 +25,7 @@ export default function LoginForm() {
 
   const reason = searchParams.get("reason");
   const emailParam = searchParams.get("email");
+  const redirect = searchParams.get("redirect"); // ✅ 추가
 
   const initialEmail =
     typeof window === "undefined"
@@ -54,6 +55,8 @@ export default function LoginForm() {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (loading) return;
+
     setShowResend(false);
 
     if (!email) {
@@ -120,7 +123,13 @@ export default function LoginForm() {
 
       setLoading(false);
       toast.addToast("로그인 성공! 환영합니다.", "success");
-      router.push("/about");
+
+      // ✅ redirect 처리
+      if (redirect && redirect.startsWith("/")) {
+        router.push(redirect);
+      } else {
+        router.push("/about");
+      }
     } catch {
       setLoading(false);
       toast.addToast("알 수 없는 오류가 발생했습니다.", "error");

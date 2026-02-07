@@ -69,7 +69,10 @@ main {
   flex-direction: column;
   width: 100%;
   min-height: calc(100vh - $footer);
-  padding-top: 48px;
+  padding-top: $header;
+}
+.contentsPage {
+  @include contentsPage-container;
 }
 
 footer {

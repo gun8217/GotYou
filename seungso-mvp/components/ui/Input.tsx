@@ -24,8 +24,8 @@ type InputProps = {
   required?: boolean;
   error?: string;
   rows?: number;
-  min?: number;
-  max?: number;
+  min?: string | number;
+  max?: string | number;
   step?: number;
   autoComplete?: string;
   style?: React.CSSProperties;

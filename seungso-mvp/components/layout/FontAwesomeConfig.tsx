@@ -26,6 +26,7 @@ import {
   faUserCheck,
   faUserPen,
   faUserPlus,
+  faUserXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 config.autoAddCss = false;
@@ -54,6 +55,7 @@ library.add(
   faUserPlus,
   faBan,
   faCircleQuestion,
+  faUserXmark,
 );
 
 export default function FontAwesomeConfig() {
