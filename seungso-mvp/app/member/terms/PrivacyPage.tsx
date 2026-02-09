@@ -78,7 +78,18 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <Title level={4}>7. 고지 의무</Title>
+        <Title level={4}>7. 회원 탈퇴 및 데이터 활용</Title>
+        <Text>
+          회원 탈퇴 시 계정은 즉시 비활성화되며 로그인할 수 없게 됩니다.
+          <br />
+          다만, 서비스 이용 과정에서 생성된 사건 정보 및 이용 기록은 AI 모델
+          학습, 통계 분석, 서비스 개선 등 내부 목적으로 계속 활용될 수 있습니다.
+          <br />이 데이터는 탈퇴 후에도 익명화 또는 가명화하여 관리됩니다.
+        </Text>
+      </section>
+
+      <section>
+        <Title level={4}>8. 고지 의무</Title>
         <Text>
           본 개인정보 수집 및 이용 안내 내용이 변경될 경우, 플랫폼은 서비스
           화면을 통해 사전에 고지합니다.

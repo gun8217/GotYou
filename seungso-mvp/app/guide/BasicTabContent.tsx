@@ -101,6 +101,10 @@ export default function Guide() {
           <Icon icon="envelope-circle-check" />
           <Icon icon="ban" />
           <Icon icon="circle-question" />
+          <Icon icon="user-circle" />
+          <Icon icon="trash-arrow-up" />
+          <Icon icon="caret-down" />
+          <Icon icon="file-pen" />
         </Flex>
       </Flex>
 

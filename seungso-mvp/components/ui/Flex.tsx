@@ -14,7 +14,7 @@ type FlexProps = {
   align?: "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
   gap?: number;
   wrap?: "nowrap" | "wrap" | "wrap-reverse";
-  className?: keyof typeof styles;
+  className?: string | keyof typeof styles;
   style?: CSSProperties;
 };
 
@@ -27,13 +27,19 @@ export default function Flex({
   className,
   style = {},
 }: FlexProps) {
+  const resolvedClass =
+    className && className in styles
+      ? styles[className as keyof typeof styles]
+      : className;
+
   return (
     <div
-      className={`${styles.flex} ${className ? styles[className] : ""}`}
+      className={`${styles.flex} ${resolvedClass ?? ""}`}
       style={{
+        display: "flex",
         flexDirection: direction,
         justifyContent: justify,
-        alignItems: align,
+        ...(align ? { alignItems: align } : {}),
         gap: `${gap}px`,
         ...style,
       }}

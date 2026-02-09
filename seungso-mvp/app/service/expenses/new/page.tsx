@@ -74,7 +74,7 @@ export default function ExpenseNewPage() {
           </Button>
         </Flex>
 
-        <Card onlyCon>
+        <Card variant="bodySm">
           <Flex direction="column" gap={10}>
             <Input
               placeholder="금액"

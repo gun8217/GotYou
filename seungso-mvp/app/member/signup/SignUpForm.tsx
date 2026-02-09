@@ -69,6 +69,11 @@ export default function SignUpForm() {
     return allowedDomains.includes(match[1].toLowerCase());
   };
 
+  const isValidPassword = (val: string) => {
+    const regex = /^(?=.*[!@#$%^&*(),.?":{}|<>]).{6,}$/;
+    return regex.test(val);
+  };
+
   const handleInputChange =
     (setter: React.Dispatch<React.SetStateAction<string>>) =>
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -90,6 +95,11 @@ export default function SignUpForm() {
 
     if (!password) {
       addToast("비밀번호를 입력해주세요.", "error");
+      return;
+    }
+
+    if (!isValidPassword(password)) {
+      addToast("비밀번호 생성 규칙을 확인해 주세요.", "error");
       return;
     }
 
@@ -118,12 +128,15 @@ export default function SignUpForm() {
     setLoading(false);
 
     if (error) {
-      if (error.message.toLowerCase().includes("rate limit")) {
+      let message = error.message;
+      if (message.includes("Password should be at least 6 characters")) {
+        message = "비밀번호는 최소 6자 이상이어야 합니다.";
+      }
+      if (message.toLowerCase().includes("rate limit")) {
         setOpenRateLimitModal(true);
         return;
       }
-
-      addToast("회원가입 실패: " + error.message, "error");
+      addToast("회원가입 실패: " + message, "error");
       return;
     }
 
@@ -134,8 +147,12 @@ export default function SignUpForm() {
   return (
     <>
       <form onSubmit={handleSignUp} autoComplete="off" noValidate>
-        <Flex direction="column" gap={16} className={styles.SignUpForm}>
-          <Icon icon="pen-to-square" className={styles.ico} />
+        <Flex
+          direction="column"
+          gap={16}
+          className={`${styles.SignUpForm} ${styles.inner}`}
+        >
+          <Icon icon="pen-to-square" className="ico md spaceMd" />
 
           <Flex direction="column" gap={4}>
             <Input
@@ -156,22 +173,27 @@ export default function SignUpForm() {
             </Flex>
           </Flex>
 
-          <div className={styles.passwordField}>
-            <Input
-              type={showPassword ? "text" : "password"}
-              name="new-password"
-              autoComplete="new-password"
-              placeholder="비밀번호"
-              value={password}
-              onChange={handleInputChange(setPassword)}
-            />
-            <span
-              onClick={() => setShowPassword((p) => !p)}
-              className={styles.eyeIcon}
-            >
-              <Icon icon={showPassword ? "eye-slash" : "eye"} />
-            </span>
-          </div>
+          <Flex direction="column" align="flex-start" gap={4}>
+            <div className={styles.passwordField}>
+              <Input
+                type={showPassword ? "text" : "password"}
+                name="new-password"
+                autoComplete="new-password"
+                placeholder="비밀번호"
+                value={password}
+                onChange={handleInputChange(setPassword)}
+              />
+              <span
+                onClick={() => setShowPassword((p) => !p)}
+                className={styles.eyeIcon}
+              >
+                <Icon icon={showPassword ? "eye-slash" : "eye"} />
+              </span>
+            </div>
+            <Text size="xs" weight="bold" color="secondary">
+              특수문자 혼용해 최소 6자 이상
+            </Text>
+          </Flex>
 
           <div className={styles.passwordField}>
             <Input
@@ -187,7 +209,6 @@ export default function SignUpForm() {
               <Icon icon={showConfirmPassword ? "eye-slash" : "eye"} />
             </span>
           </div>
-
           <Flex
             direction="column"
             align="flex-end"
@@ -218,7 +239,6 @@ export default function SignUpForm() {
               />
             </div>
           </Flex>
-
           <Button
             type="submit"
             styleType="primary"

@@ -87,7 +87,7 @@ export default function ExpensesSummaryPage() {
         <Title level={1}>지출 요약</Title>
 
         {/* 전체 합계 */}
-        <Card onlyCon>
+        <Card variant="bodySm">
           <Text size="lg" weight="bold">
             전체 지출 합계
           </Text>
@@ -97,7 +97,7 @@ export default function ExpensesSummaryPage() {
         </Card>
 
         {/* 사건별 합계 */}
-        <Card onlyCon>
+        <Card variant="bodySm">
           <Text size="lg" weight="bold">
             사건별 지출 합계
           </Text>

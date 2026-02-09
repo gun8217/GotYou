@@ -40,11 +40,9 @@
 .normal {
   font-weight: $font-weight-regular;
 }
-
 .bold {
   font-weight: $font-weight-medium;
 }
-
 .light {
   font-weight: $font-weight-thin;
 }
@@ -55,19 +53,28 @@
 .default {
   color: $color-black;
 }
-
 .primary {
   color: $color-primary;
 }
-
 .secondary {
   color: $color-gray-700;
 }
-
 .info {
   color: $color-gray-500;
 }
-
 .error {
   color: $color-error;
+}
+
+/* ----------------------------------------
+   Align
+   ---------------------------------------- */
+.left {
+  text-align: left;
+}
+.center {
+  text-align: center;
+}
+.right {
+  text-align: right;
 }

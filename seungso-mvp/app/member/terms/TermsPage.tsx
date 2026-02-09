@@ -79,7 +79,18 @@ export default function TermsPage() {
       </section>
 
       <section>
-        <Title level={4}>제7조 (면책조항)</Title>
+        <Title level={4}>제7조 (회원 탈퇴 및 데이터 활용)</Title>
+        <Text>
+          회원 탈퇴 시 계정은 즉시 비활성화되며 로그인할 수 없게 됩니다.
+          <br />
+          다만, 서비스 이용 과정에서 생성된 사건 정보 및 이용 기록은 AI 모델
+          학습, 통계 분석, 서비스 개선 등 내부 목적으로 계속 활용될 수 있습니다.
+          이 데이터는 탈퇴 후에도 익명화 또는 가명화하여 관리됩니다.
+        </Text>
+      </section>
+
+      <section>
+        <Title level={4}>제8조 (면책조항)</Title>
         <Text>
           플랫폼은 이용자가 제공한 정보의 정확성, 외부 집행 결과, 제3자의 행위로
           발생한 손해에 대하여 책임을 지지 않습니다.
@@ -87,7 +98,7 @@ export default function TermsPage() {
       </section>
 
       <section>
-        <Title level={4}>제8조 (서비스 이용 제한)</Title>
+        <Title level={4}>제9조 (서비스 이용 제한)</Title>
         <Text>
           플랫폼은 이용자가 본 약관을 위반하거나 관련 법령에 위반되는 행위를 한
           경우 서비스 이용을 제한할 수 있습니다.
@@ -95,7 +106,7 @@ export default function TermsPage() {
       </section>
 
       <section>
-        <Title level={4}>제9조 (콘텐츠 저작권 및 기술 고지)</Title>
+        <Title level={4}>제10조 (콘텐츠 저작권 및 기술 고지)</Title>
         <Text>
           1. 플랫폼에 게시된 모든 콘텐츠의 저작권은 &quot;플랫폼&quot;에
           귀속됩니다.

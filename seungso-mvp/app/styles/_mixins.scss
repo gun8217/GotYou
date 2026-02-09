@@ -29,3 +29,9 @@
   margin: 0 $inner-margin-x;
   padding: 30px;
 }
+
+@mixin member-container {
+  max-width: 420px;
+  width: 100%;
+  margin: 0 $inner-margin-x;
+}

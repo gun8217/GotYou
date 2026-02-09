@@ -1,6 +1,3 @@
-import Flex from "@/components/ui/Flex";
-import Title from "@/components/ui/Title";
-import styles from "../MemberCommon.module.scss";
 import WithdrawForm from "./WithdrawForm";
 
 export const pageName = "회원탈퇴";
@@ -13,10 +10,5 @@ export const metadata = {
 };
 
 export default function WithdrawPage() {
-  return (
-    <Flex direction="column" className={styles.MemberWrap}>
-      <Title level={1}>회원탈퇴</Title>
-      <WithdrawForm />
-    </Flex>
-  );
+  return <WithdrawForm />;
 }

@@ -7,15 +7,17 @@ import { supabase } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import Button from "@/components/ui/Button";
+import Loading from "@/components/common/Loading";
 import Card from "@/components/ui/Card";
 import Flex from "@/components/ui/Flex";
 import Icon from "@/components/ui/Icon";
-import Input from "@/components/ui/Input";
 import Text from "@/components/ui/Text";
 import Title from "@/components/ui/Title";
+import Link from "next/link";
 
-export default function MyPageCardV2() {
+import styles from "./MemberCommon.module.scss";
+
+export default function MyPageCard() {
   const router = useRouter();
   const [email, setEmail] = useState<string>("");
   const [createdAt, setCreatedAt] = useState<string>("");
@@ -39,77 +41,58 @@ export default function MyPageCardV2() {
     fetchUser();
   }, [router]);
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    router.replace("/");
-  };
-
-  const handleWithdraw = async () => {
-    const ok = confirm(
-      "정말 탈퇴하시겠습니까? 모든 정보는 복구할 수 없습니다.",
-    );
-    if (!ok) return;
-
-    const { data: authData } = await supabase.auth.getUser();
-    if (!authData.user) return;
-
-    await supabase
-      .from("profiles")
-      .update({ is_active: false })
-      .eq("user_id", authData.user.id);
-
-    await supabase.auth.signOut();
-    alert("탈퇴 처리되었습니다.");
-    router.replace("/");
-  };
-
-  if (loading) return <Text>로딩 중...</Text>;
+  if (loading) return <Loading />;
 
   return (
-    <Flex direction="column" align="center" gap={32} style={{ padding: 40 }}>
+    <Flex direction="column" className={styles.MemberWrap}>
       <Title level={1}>마이페이지</Title>
 
-      <Card style={{ width: 460 }}>
-        <Flex direction="column" gap={20}>
+      <Flex direction="column" gap={40} className={styles.inner}>
+        <Card title="가입 정보">
           <Flex align="center" gap={12}>
-            <Icon icon="user-circle" size="xl" />
-            <Flex direction="column">
-              <Text weight="bold">내 계정</Text>
-              <Text size="sm" color="secondary">
-                가입일: {createdAt}
-              </Text>
+            <Icon icon="user-circle" className="ico sm" />
+
+            <Flex direction="column" align="flex-start" gap={12}>
+              <Flex direction="column" gap={4}>
+                <Flex gap={6}>
+                  <Text size="sm" weight="bold">
+                    이메일
+                  </Text>
+                  <Text size="sm" color="secondary">
+                    {email}
+                  </Text>
+                </Flex>
+
+                <Flex gap={6}>
+                  <Text size="sm" weight="bold">
+                    가입일
+                  </Text>
+                  <Text size="sm" color="secondary">
+                    {createdAt}
+                  </Text>
+                </Flex>
+              </Flex>
             </Flex>
           </Flex>
+        </Card>
 
-          <Flex direction="column" gap={8}>
-            <Text size="sm" color="secondary">
-              이메일
-            </Text>
-            <Input value={email} disabled onChange={() => {}} />
+        <Card title="계정 관리">
+          <Flex direction="column" align="flex-start" className="linkList">
+            <Link href="/member/change-email">
+              <Icon icon="caret-down" />
+              이메일 변경
+            </Link>
+            <Link href="/member/change-password">
+              <Icon icon="caret-down" />
+              비밀번호 변경
+            </Link>
+            <Link href="/member/withdraw">
+              <Icon icon="caret-down" />
+              회원탈퇴
+            </Link>
           </Flex>
-        </Flex>
-      </Card>
-
-      <Card style={{ width: 460 }}>
-        <Flex direction="column" gap={16}>
-          <Text weight="bold">계정 관리</Text>
-
-          <Button
-            styleType="secondary"
-            onClick={() => router.push("/member/change-password")}
-          >
-            비밀번호 변경
-          </Button>
-
-          <Button styleType="secondary" onClick={handleLogout}>
-            로그아웃
-          </Button>
-
-          <Button styleType="error" onClick={handleWithdraw}>
-            회원탈퇴
-          </Button>
-        </Flex>
-      </Card>
+        </Card>
+      </Flex>
     </Flex>
   );
 }

@@ -114,7 +114,7 @@ export default function CaseDetailPage() {
     <div className="contentsPage">
       <Flex direction="column" gap={30}>
         <Title level={1}>사건 상세</Title>
-        <Card onlyCon>
+        <Card variant="bodySm">
           <Flex direction="column" gap={20}>
             {editMode ? (
               <>

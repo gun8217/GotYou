@@ -100,7 +100,7 @@ export default function NewCasePage() {
         <Title level={1}>사건 등록</Title>
 
         <Flex direction="column" gap={6}>
-          <Card onlyCon>
+          <Card variant="bodySm">
             <Flex direction="column" gap={50}>
               {/* 필수 항목 */}
               <Flex direction="column" gap={16}>

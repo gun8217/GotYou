@@ -10,6 +10,7 @@
   border-radius: $radius-md;
   background: $color-bg-card;
   box-shadow: $shadow-sm;
+
   .header {
     padding-bottom: $spacing-3;
     font-size: $font-size-md;
@@ -17,13 +18,26 @@
     color: $color-gray-700;
     border-bottom: 1px solid $color-border-default;
   }
+
   .body {
     padding-top: $spacing-3;
     font-size: $font-size-sm;
     color: $color-gray-700;
     line-height: $line-height-base;
   }
-  &.onlyCon .body {
-    padding: $spacing-3;
+
+  &.bodySm {
+    .body {
+      padding: $spacing-3;
+    }
+  }
+
+  &.noHeader {
+    .header {
+      display: none;
+    }
+    .body {
+      padding-top: 0;
+    }
   }
 }

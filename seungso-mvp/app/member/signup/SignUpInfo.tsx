@@ -21,7 +21,7 @@ export default function SignUpSteps() {
       content: (
         <>
           <Flex direction="column" gap={8} className={styles.SignUpInfo}>
-            <Icon icon="triangle-exclamation" className={styles.ico} />
+            <Icon icon="triangle-exclamation" className="ico md spaceMd" />
 
             <Text color="info">이메일 주소가 곧 아이디가 됩니다.</Text>
             <Text color="info">

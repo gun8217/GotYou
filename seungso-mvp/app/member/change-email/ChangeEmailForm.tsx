@@ -11,16 +11,17 @@ import Input from "@/components/ui/Input";
 import Text from "@/components/ui/Text";
 import Title from "@/components/ui/Title";
 
+import { useToast } from "@/components/ui/ToastProvider";
+
 import styles from "../MemberCommon.module.scss";
 
 export default function ChangeEmailForm() {
+  const { addToast } = useToast();
+
   const [currentEmail, setCurrentEmail] = useState("");
   const [newEmail, setNewEmail] = useState("");
-
-  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // 현재 로그인한 유저 이메일 불러오기
   useEffect(() => {
     const fetchUser = async () => {
       const { data, error } = await supabase.auth.getUser();
@@ -32,86 +33,118 @@ export default function ChangeEmailForm() {
     fetchUser();
   }, []);
 
+  const isValidEmail = (val: string) => {
+    const email = val.trim();
+    const allowedDomains = [
+      "naver.com",
+      "daum.net",
+      "gmail.com",
+      "hanmail.net",
+      "nate.com",
+      "hotmail.com",
+      "outlook.com",
+      "kakao.com",
+    ];
+    const match = email.match(/^[^\s@]+@([^\s@]+)$/);
+    if (!match) return false;
+    return allowedDomains.includes(match[1].toLowerCase());
+  };
+
   const handleChangeEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!newEmail) {
-      setMessage("새 이메일을 입력해주세요.");
+      addToast("새 이메일을 입력해주세요.", "error");
+      return;
+    }
+
+    if (!isValidEmail(newEmail)) {
+      addToast("유효한 이메일 형식을 입력해주세요.", "error");
       return;
     }
 
     if (newEmail === currentEmail) {
-      setMessage("현재 이메일과 동일합니다.");
+      addToast("현재 이메일과 동일합니다.", "error");
       return;
     }
 
     setLoading(true);
-    setMessage("");
 
     const { error } = await supabase.auth.updateUser({
       email: newEmail,
     });
 
+    setLoading(false);
+
     if (error) {
-      setMessage("이메일 변경 실패: " + error.message);
-      setLoading(false);
+      console.error("change email error:", error);
+
+      if (error.message.toLowerCase().includes("rate limit")) {
+        addToast("요청이 너무 많습니다. 잠시 후 다시 시도해주세요.", "error");
+        return;
+      }
+
+      addToast("이메일 변경에 실패했습니다.", "error");
       return;
     }
 
-    alert("새 이메일로 인증 메일을 보냈습니다. 메일을 확인해주세요.");
-    setLoading(false);
+    addToast(
+      "새 이메일로 인증 메일을 보냈습니다. 메일을 확인해주세요.",
+      "success",
+    );
     setNewEmail("");
   };
 
   return (
-    <form onSubmit={handleChangeEmail} className={styles.changeEmailForm}>
+    <form
+      onSubmit={handleChangeEmail}
+      className={styles.changeEmailForm}
+      noValidate
+    >
       <Flex direction="column" align="center" className={styles.MemberWrap}>
         <Title level={1}>이메일 변경</Title>
 
-        <Card className={styles.LoginCard}>
-          <Icon icon="envelope-circle-check" className={styles.ico} />
+        <Flex direction="column" gap={40} className={styles.inner}>
+          <Card variant="noHeader" className={styles.LoginCard}>
+            <Icon icon="file-pen" className="ico md spaceMd" />
 
-          <Flex direction="column" gap={16}>
-            <Flex direction="column" align="flex-start" gap={2}>
+            <Flex direction="column" gap={16}>
+              <Flex direction="column" align="flex-start" gap={4}>
+                <Input
+                  type="email"
+                  value={currentEmail}
+                  placeholder="현재 이메일"
+                  disabled
+                  onChange={() => {}}
+                  style={{ width: "100%" }}
+                />
+                <Text size="xs" weight="bold" color="primary">
+                  이메일 변경 시, 기존 이메일과 새 이메일로 확인 메일이
+                  전송됩니다.
+                </Text>
+              </Flex>
+
               <Input
-                type="email"
-                value={currentEmail}
-                placeholder="현재 이메일"
-                disabled
-                onChange={() => {}}
-                style={{ width: "100%" }}
+                type="text"
+                inputMode="email"
+                autoComplete="email"
+                placeholder="새 이메일"
+                value={newEmail}
+                onChange={(e) => setNewEmail(e.target.value)}
+                disabled={loading}
               />
-              <Text size="xs" weight="bold" color="primary">
-                이메일 변경 시, 기존 이메일과 새 이메일로 확인 메일이
-                전송됩니다.
-              </Text>
             </Flex>
+          </Card>
 
-            <Input
-              type="email"
-              placeholder="새 이메일"
-              value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
-              required
-            />
-          </Flex>
-        </Card>
-
-        <Button
-          type="submit"
-          styleType="primary"
-          size="lg"
-          style={{ width: "420px" }}
-          disabled={loading}
-        >
-          {loading ? "변경 중..." : "이메일 변경하기"}
-        </Button>
-
-        {message && (
-          <Text color="error" size="sm">
-            {message}
-          </Text>
-        )}
+          <Button
+            type="submit"
+            styleType="primary"
+            size="lg"
+            disabled={loading}
+          >
+            {loading ? "변경 중..." : "이메일 변경하기"}
+          </Button>
+        </Flex>
       </Flex>
     </form>
   );

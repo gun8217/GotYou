@@ -8,13 +8,8 @@
   h1 {
     margin: $spacing-10 0 $spacing-6;
   }
-}
-
-.SignUpInfo {
-  .ico {
-    margin: $spacing-10 0 $spacing-6;
-    font-size: 8rem;
-    color: $color-gray-300;
+  .inner {
+    @include member-container;
   }
 }
 
@@ -23,18 +18,15 @@
 }
 
 .SignUpForm {
-  @include max-fixed-container;
   margin-top: $spacing-16;
-  padding: 0 130px;
 
-  .ico {
-    margin: -$spacing-3 0 $spacing-5;
-    font-size: 7rem;
-    color: $color-gray-300;
-  }
+  // .ico {
+  //   font-size: 7rem;
+  // }
 
   .passwordField {
     position: relative;
+    width: 100%;
     .eyeIcon {
       position: absolute;
       top: 50%;
@@ -55,17 +47,8 @@
   text-align: left;
 }
 
-.LoginCard {
-  width: 420px;
-  margin: $spacing-4 $inner-margin-x $spacing-16;
-  .ico {
-    margin-bottom: $spacing-5;
-    font-size: 5rem;
-    color: $color-gray-300;
-  }
-  .topMsg {
-    margin-bottom: $spacing-5;
-  }
+.LoginCard .topMsg {
+  margin-bottom: $spacing-5;
 }
 
 .forgotInfo {

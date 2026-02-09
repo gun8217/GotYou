@@ -6,22 +6,24 @@ import styles from "./Card.module.scss";
 type CardProps = React.HTMLAttributes<HTMLDivElement> & {
   title?: ReactNode;
   children: ReactNode;
-  onlyCon?: boolean;
+  variant?: "default" | "bodySm" | "noHeader";
 };
 
 export default function Card({
   title,
   children,
   className = "",
-  onlyCon = false,
+  variant = "default",
   ...props
 }: CardProps) {
   return (
     <div
-      className={`${styles.card} ${onlyCon ? styles.onlyCon : ""} ${className}`}
+      className={`${styles.card} ${styles[variant]} ${className}`}
       {...props}
     >
-      {title && <div className={styles.header}>{title}</div>}
+      {variant !== "noHeader" && title && (
+        <div className={styles.header}>{title}</div>
+      )}
       <div className={styles.body}>{children}</div>
     </div>
   );

@@ -28,6 +28,7 @@ type InputProps = {
   max?: string | number;
   step?: number;
   autoComplete?: string;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
   style?: React.CSSProperties;
 };
 
@@ -46,6 +47,7 @@ export default function Input({
   max,
   step,
   autoComplete,
+  inputMode,
   style,
 }: InputProps) {
   return (
@@ -82,6 +84,7 @@ export default function Input({
           max={max}
           step={step}
           autoComplete={autoComplete}
+          inputMode={inputMode}
           className={`${styles.input} ${error ? styles.error : ""}`}
         />
       )}
