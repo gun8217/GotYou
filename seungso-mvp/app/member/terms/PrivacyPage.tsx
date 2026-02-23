@@ -3,17 +3,26 @@
 import Text from "@/components/ui/Text";
 import Title from "@/components/ui/Title";
 
+import Flex from "@/components/ui/Flex";
 import styles from "../MemberCommon.module.scss";
 
 export const pageName = "개인정보 수집 및 이용 안내";
 
-export default function PrivacyPage() {
+export default function PrivacyPage({
+  showHeader = true,
+}: {
+  showHeader?: boolean;
+}) {
   return (
     <div className={styles.terms}>
-      <Title level={2}>개인정보 수집 및 이용 안내</Title>
+      {showHeader && (
+        <Flex justify="center">
+          <Title level={1}>개인정보 수집 및 이용 안내</Title>
+        </Flex>
+      )}
 
       <section>
-        <Title level={4}>1. 수집하는 개인정보 항목</Title>
+        <Title level={2}>1. 수집하는 개인정보 항목</Title>
         <Text>
           플랫폼은 회원가입 및 서비스 제공을 위해 다음의 개인정보를 수집합니다.
           <br />
@@ -25,7 +34,7 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <Title level={4}>2. 개인정보 수집 목적</Title>
+        <Title level={2}>2. 개인정보 수집 목적</Title>
         <Text>
           수집된 개인정보는 다음 목적에 한하여 이용됩니다.
           <br />
@@ -45,7 +54,7 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <Title level={4}>3. 개인정보 보관 기간</Title>
+        <Title level={2}>3. 개인정보 보관 기간</Title>
         <Text>
           이용자의 개인정보는 회원 탈퇴 시까지 보관하며, 관계 법령에 따라 보존할
           필요가 있는 경우 해당 기간 동안 보관합니다.
@@ -53,7 +62,7 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <Title level={4}>4. 개인정보의 제3자 제공</Title>
+        <Title level={2}>4. 개인정보의 제3자 제공</Title>
         <Text>
           플랫폼은 이용자의 동의 없이 개인정보를 제3자에게 제공하지 않습니다.
           다만, 이용자가 외부 전문가(법무사 등)와의 연결을 선택한 경우, 해당
@@ -62,7 +71,7 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <Title level={4}>5. 이용자의 권리</Title>
+        <Title level={2}>5. 이용자의 권리</Title>
         <Text>
           이용자는 언제든지 본인의 개인정보를 조회, 수정, 삭제할 수 있으며, 회원
           탈퇴를 통해 개인정보 이용을 중단할 수 있습니다.
@@ -70,7 +79,7 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <Title level={4}>6. 개인정보 보호를 위한 조치</Title>
+        <Title level={2}>6. 개인정보 보호를 위한 조치</Title>
         <Text>
           플랫폼은 Supabase 인증 시스템과 데이터 접근 제어(RLS)를 활용하여
           이용자의 개인정보와 사건 데이터를 본인만 접근 가능하도록 관리합니다.
@@ -78,7 +87,7 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <Title level={4}>7. 회원 탈퇴 및 데이터 활용</Title>
+        <Title level={2}>7. 회원 탈퇴 및 데이터 활용</Title>
         <Text>
           회원 탈퇴 시 계정은 즉시 비활성화되며 로그인할 수 없게 됩니다.
           <br />
@@ -89,7 +98,7 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <Title level={4}>8. 고지 의무</Title>
+        <Title level={2}>8. 고지 의무</Title>
         <Text>
           본 개인정보 수집 및 이용 안내 내용이 변경될 경우, 플랫폼은 서비스
           화면을 통해 사전에 고지합니다.
@@ -97,7 +106,7 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <Title level={4}>부칙</Title>
+        <Title level={2}>부칙</Title>
         <Text>본 안내는 2026년 2월 1일부터 적용됩니다.</Text>
       </section>
     </div>

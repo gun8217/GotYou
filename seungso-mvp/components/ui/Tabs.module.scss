@@ -4,7 +4,7 @@
 .tabWrap {
   width: 100%;
   .tabList {
-    margin-bottom: $spacing-4;
+    margin-bottom: $spacing-10;
     border-bottom: 1px solid $color-border-default;
     background: $color-white;
     & > div {
@@ -17,8 +17,8 @@
       position: relative;
       background: none;
       border: none;
-      padding: $spacing-2 $spacing-4;
-      font-size: $font-size-md;
+      padding: $spacing-4 $spacing-5;
+      font-size: $font-size-lg;
       font-weight: $font-weight-medium;
       color: $color-gray-300;
       cursor: pointer;

@@ -12,8 +12,8 @@ export default function MemberTermsPage() {
   const tab = searchParams.get("tab");
 
   const tabs = [
-    { label: "서비스 이용약관", content: <TermsPage /> },
-    { label: "개인정보 처리방침", content: <PrivacyPage /> },
+    { label: "서비스 이용약관", content: <TermsPage showHeader={false} /> },
+    { label: "개인정보 처리방침", content: <PrivacyPage showHeader={false} /> },
   ];
 
   const initialIndex = tab === "privacy" ? 1 : 0;

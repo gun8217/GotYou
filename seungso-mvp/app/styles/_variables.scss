@@ -10,7 +10,7 @@ $min-width: 750px;
 $inner-width: 1024px;
 $inner-margin-x: auto;
 $header: 48px;
-$footer: 31px;
+$footer: 77px;
 $content-height-full: calc(100vh - $header - $footer);
 
 /* ----------------------------------------
@@ -40,9 +40,9 @@ $color-link: #0284c7;
 $color-link-hover: #075985;
 
 /* Background */
-$color-bg-body: #f8fafc;
+$color-bg-body: #fff;
 $color-bg-muted: #f1f5f9;
-$color-bg-card: #fff;
+$color-bg-card: #f8fafc;
 
 /* Border */
 $color-border-title: rgba(0, 0, 0, 0.35);

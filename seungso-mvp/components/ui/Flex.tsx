@@ -24,6 +24,7 @@ export default function Flex({
   justify,
   align,
   gap = 0,
+  wrap = "nowrap",
   className,
   style = {},
 }: FlexProps) {
@@ -41,6 +42,7 @@ export default function Flex({
         justifyContent: justify,
         ...(align ? { alignItems: align } : {}),
         gap: `${gap}px`,
+        flexWrap: wrap,
         ...style,
       }}
     >

@@ -93,6 +93,7 @@ export default function Guide() {
       <Flex direction="column" gap={8}>
         <Title text="Card" />
         <Card title="카드 타이틀">카드 본문 내용입니다.</Card>
+        <Card variant="noHeader">타이틀 없는 카드 본문 내용입니다.</Card>
       </Flex>
     </Flex>
   );

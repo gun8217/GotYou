@@ -165,7 +165,7 @@ export default function SignUpForm() {
             />
             <Flex gap={6}>
               <Text size="xs" weight="bold" color="secondary">
-                사용 가능 이메일
+                ❗사용 가능 이메일
               </Text>
               <Text size="xs" color="info">
                 네이버, 구글(Gmail), 다음, 카카오, 네이트, 아웃룩
@@ -191,7 +191,7 @@ export default function SignUpForm() {
               </span>
             </div>
             <Text size="xs" weight="bold" color="secondary">
-              특수문자 혼용해 최소 6자 이상
+              ❗특수문자 혼용해 최소 6자 이상
             </Text>
           </Flex>
 
@@ -263,8 +263,8 @@ export default function SignUpForm() {
         }
       >
         <div className={styles.modalScrollContent}>
-          {modalContent === "terms" && <TermsPage />}
-          {modalContent === "privacy" && <PrivacyPage />}
+          {modalContent === "terms" && <TermsPage showHeader={true} />}
+          {modalContent === "privacy" && <PrivacyPage showHeader={true} />}
         </div>
       </Modal>
 

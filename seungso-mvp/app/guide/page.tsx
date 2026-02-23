@@ -6,14 +6,10 @@ export default async function GuidePage() {
   const supabase = await createSupabaseServerClient();
 
   const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    data: { session },
+  } = await supabase.auth.getSession();
 
-  if (!user) {
-    redirect("/member/login");
-  }
-
-  if (user.email !== process.env.ADMIN_USER_ID) {
+  if (session?.user?.email !== process.env.ADMIN_USER_ID) {
     redirect("/");
   }
 

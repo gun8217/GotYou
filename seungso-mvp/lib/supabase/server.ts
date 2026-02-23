@@ -1,3 +1,4 @@
+// lib/supabase/server.ts
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
@@ -9,16 +10,13 @@ export async function createSupabaseServerClient() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        get(name) {
-          return cookieStore.get(name)?.value;
+        get(name: string) {
+          return cookieStore.get(name)?.value ?? null;
         },
-        set(name, value, options) {
-          cookieStore.set({ name, value, ...options });
-        },
-        remove(name, options) {
-          cookieStore.set({ name, value: "", ...options });
-        },
+        // ❗ Server Component에서는 수정 금지
+        set() {},
+        remove() {},
       },
-    }
+    },
   );
 }
