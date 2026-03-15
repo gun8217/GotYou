@@ -76,9 +76,9 @@ export default function Header({ menu }: { menu: MenuItem[] }) {
           <nav aria-label="상단 주요 메뉴">
             <Link href="/" className="logo">
               <span>
-                <Image src={logo} alt="승소환전소 로고" />
+                <Image src={logo} alt="집행나침반 로고" />
               </span>
-              <b>승소환전소</b>
+              <b>집행나침반</b>
             </Link>
 
             <div className="menuGroup">

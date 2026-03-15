@@ -7,7 +7,7 @@ export default function HomePage() {
       <section id="hero">
         <div>
           <span>MVP • 집행 의사결정 지원 플랫폼</span>
-          <h1>승소환전소</h1>
+          <h1>집행나침반</h1>
           <p>
             판결 이후 집행 단계의 비효율을 줄이고, 권리 실현 가능성을 높이는
             디지털 집행 지원 서비스
@@ -39,7 +39,7 @@ export default function HomePage() {
         <div>
           <h2>사업 개요</h2>
           <p>
-            승소환전소는 국가기관(KAMCO)의 회수 예측 로직을 기반으로, 소액
+            집행나침반는 국가기관(KAMCO)의 회수 예측 로직을 기반으로, 소액
             채권자가 집행 착수 여부를 데이터로 판단할 수 있도록 돕는 의사결정
             플랫폼입니다.
           </p>

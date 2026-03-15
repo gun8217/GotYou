@@ -23,7 +23,7 @@ export default function TermsPage({
       <section>
         <Title level={2}>제1조 (목적)</Title>
         <Text>
-          본 약관은 승소환전소(이하 “플랫폼”)가 제공하는 서비스의 이용과
+          본 약관은 집행나침반(이하 “플랫폼”)가 제공하는 서비스의 이용과
           관련하여 플랫폼과 이용자 간의 권리, 의무 및 책임사항을 규정함을
           목적으로 합니다.
         </Text>

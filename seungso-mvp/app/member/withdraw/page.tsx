@@ -6,7 +6,7 @@ export const requiresAuth = true;
 
 export const metadata = {
   title: "회원탈퇴",
-  description: "승소환전소 회원탈퇴 페이지입니다.",
+  description: "집행나침반 회원탈퇴 페이지입니다.",
 };
 
 export default function WithdrawPage() {

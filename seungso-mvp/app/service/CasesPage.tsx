@@ -101,7 +101,7 @@ export default function CasesPage() {
   if (loading) return <Text>로딩 중...</Text>;
 
   return (
-    <Flex direction="column" gap={24} style={{ padding: 40 }}>
+    <Flex direction="column" gap={24} className="contentsPage">
       <Flex justify="space-between" align="center">
         <Title level={1}>사건 관리</Title>
         <Button styleType="primary" onClick={() => setOpenModal(true)}>

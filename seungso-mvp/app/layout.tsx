@@ -12,10 +12,10 @@ import Link from "next/link";
 
 export const metadata = {
   title: {
-    default: "승소환전소",
-    template: "%s | 승소환전소",
+    default: "집행나침반",
+    template: "%s | 집행나침반",
   },
-  description: "승소환전소에 오신 것을 환영합니다.",
+  description: "집행나침반에 오신 것을 환영합니다.",
 };
 
 export default function RootLayout({
@@ -42,7 +42,7 @@ export default function RootLayout({
                 <main>{children}</main>
                 <footer>
                   <Text size="xs" color="info" as="p">
-                    Copyright ⓒ 2026 승소환전소.
+                    Copyright ⓒ 2026 집행나침반.
                   </Text>
                   <Flex justify="center" className="footMenu">
                     <Link href="/member/terms?tab=terms">이용약관</Link>

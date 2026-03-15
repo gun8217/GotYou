@@ -3,19 +3,19 @@ import Flex from "@/components/ui/Flex";
 import Text from "@/components/ui/Text";
 import Title from "@/components/ui/Title";
 
-export const pageName = "승소환전소의 시작";
+export const pageName = "집행나침반의 시작";
 
 export default function AboutPage() {
   return (
     <Flex direction="column" gap={40} className="contentsPage">
       <Flex justify="center">
-        <Title level={1}>승소환전소의 시작</Title>
+        <Title level={1}>집행나침반의 시작</Title>
       </Flex>
 
       <Card title="판결은 받았지만, 돈은 받지 못했습니다.">
         <Flex direction="column" gap={8}>
           <Text size="sm" color="secondary" as="p">
-            승소환전소는 ‘승소하고도 돈을 받지 못한 경험’에서 시작되었습니다.
+            집행나침반는 ‘승소하고도 돈을 받지 못한 경험’에서 시작되었습니다.
           </Text>
           <Text size="sm" color="secondary" as="p">
             법원에서 이겼다는 판결문을 손에 쥐었지만, 그 다음 단계는 아무도
@@ -41,7 +41,7 @@ export default function AboutPage() {
         </Flex>
       </Card>
 
-      <Card title="승소환전소는 이런 생각에서 만들어졌습니다.">
+      <Card title="집행나침반는 이런 생각에서 만들어졌습니다.">
         <Flex direction="column" gap={8}>
           <Text size="sm" color="secondary" as="p">
             승소한 사람이 길을 헤매지 않도록
@@ -58,7 +58,7 @@ export default function AboutPage() {
         </Flex>
       </Card>
 
-      <Card title="승소환전소가 돕고 싶은 사람들">
+      <Card title="집행나침반가 돕고 싶은 사람들">
         <Flex direction="column" gap={8}>
           <Text size="sm" color="secondary" as="p">
             판결은 받았지만 어떻게 돈을 받아야 할지 모르는 분
@@ -82,11 +82,11 @@ export default function AboutPage() {
             판결은 결과이지만, 회수는 또 다른 과정입니다.
           </Text>
           <Text size="sm" color="secondary" as="p">
-            승소환전소는 그 사이의 공백을 줄이기 위해 만들어졌습니다.
+            집행나침반는 그 사이의 공백을 줄이기 위해 만들어졌습니다.
           </Text>
           <Text as="p">승소를 ‘종이’가 아니라 ‘현실’로 바꾸는 것.</Text>
           <Text size="sm" color="secondary" as="p">
-            그것이 승소환전소의 시작입니다.
+            그것이 집행나침반의 시작입니다.
           </Text>
         </Flex>
       </Card>
