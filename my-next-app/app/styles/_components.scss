@@ -1,0 +1,57 @@
+@use "@/app/styles/variables" as *;
+@use "@/app/styles/mixins" as *;
+
+.loadingSpinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  .inner {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.ico {
+  font-size: 5rem;
+  color: $color-gray-300;
+  &.lg {
+    font-size: 10rem;
+  }
+  &.md {
+    font-size: 7rem;
+  }
+  &.sm {
+    font-size: 3rem;
+  }
+  &.spaceMd {
+    margin: $spacing-5 0;
+  }
+}
+
+.linkList {
+  a {
+    display: block;
+    width: 100%;
+    padding: $spacing-3 0;
+    color: $color-gray-900;
+    text-align: left;
+
+    span > svg {
+      margin-right: $spacing-1;
+      transform: rotate(-90deg);
+      transition: all $transition-base;
+    }
+    &:hover {
+      color: $color-link;
+      span > svg {
+        padding-left: $spacing-1;
+        margin-right: 0;
+        transform: scale(1.14) rotate(-90deg);
+      }
+    }
+  }
+  a + a {
+    border-top: $color-border-muted 1px solid;
+  }
+}

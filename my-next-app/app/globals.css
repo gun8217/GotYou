@@ -10,6 +10,12 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-brand-blue-50: #f0f1ff;
+  --color-brand-blue-100: #e4e6ff;
+  --color-brand-blue-500: #3d49f0;
+  --color-brand-blue-600: #2d34d6;
+  --color-brand-blue-700: #2314a3; /* ★ 집행나침반 시그니처 컬러 */
+  --color-brand-blue-900: #1d176b;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,5 +1,6 @@
 "use client";
 
+import { Flex } from "@/components/common/LayoutElements";
 import { Check, ChevronRight } from "lucide-react";
 
 interface AgreementItemProps {
@@ -16,26 +17,22 @@ export default function AgreementItem({
   return (
     <div
       onClick={onToggle}
-      className="flex items-center justify-between group p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition-colors"
+      className="flex items-center justify-between group p-2 cursor-pointer transition-colors hover:bg-slate-50 border border-transparent hover:border-slate-100"
     >
-      <div className="flex items-center gap-3 pointer-events-none">
+      <Flex gap={3} className="pointer-events-none">
         <div
-          className={`flex h-5 w-5 items-center justify-center rounded-md border-2 transition-all ${
-            checked
-              ? "bg-blue-600 border-blue-600 shadow-sm shadow-blue-100"
-              : "border-slate-300 bg-white"
-          }`}
+          className={`w-4 h-4 flex items-center justify-center border transition-all ${checked ? "bg-blue-600 border-blue-600" : "border-slate-300 bg-white"}`}
         >
-          {checked && <Check className="h-3 w-3 text-white stroke-[4px]" />}
+          {checked && <Check className="h-2.5 w-2.5 text-white stroke-[4px]" />}
         </div>
         <span
-          className={`text-xs font-bold transition-colors ${checked ? "text-slate-900" : "text-slate-500"}`}
+          className={`text-[13px] font-medium transition-colors ${checked ? "text-slate-900" : "text-slate-400"}`}
         >
           {label}
         </span>
-      </div>
-      <div className="text-slate-300 group-hover:text-blue-500 transition-colors flex items-center gap-1 text-[11px] font-bold">
-        보기 <ChevronRight className="h-3 w-3" />
+      </Flex>
+      <div className="flex items-center gap-1 text-[10px] font-bold text-slate-300 group-hover:text-blue-500 transition-colors uppercase tracking-tighter">
+        View <ChevronRight className="h-3 w-3" />
       </div>
     </div>
   );

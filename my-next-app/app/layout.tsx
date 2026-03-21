@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import { createServerClient } from "@supabase/ssr";
 import type { Metadata } from "next";
@@ -54,6 +55,7 @@ export default async function RootLayout({
         {/* key={user?.id} 를 추가하여 유저 상태에 따른 컴포넌트 인스턴스를 고정합니다. */}
         <Header initialUser={user} key={user?.id ?? "guest"} />
         {children}
+        <Footer />
       </body>
     </html>
   );

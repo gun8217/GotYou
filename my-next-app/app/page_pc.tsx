@@ -39,7 +39,7 @@ export default function HeroSection() {
     const createBlob = (): Blob => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      radius: Math.random() * 300 + 100,
+      radius: Math.random() * 300 + 250,
       color: colors[Math.floor(Math.random() * colors.length)],
     });
 
@@ -57,7 +57,7 @@ export default function HeroSection() {
           b.y,
           b.radius,
         );
-        gradient.addColorStop(0, b.color + "30");
+        gradient.addColorStop(0, b.color + "40");
         gradient.addColorStop(1, b.color + "05");
 
         ctx.fillStyle = gradient;
