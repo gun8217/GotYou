@@ -93,3 +93,10 @@ Web-first · Data-driven · Supabase-native
 
 > “Supabase 기반으로 빠르게 MVP를 구현하고,
 > 데이터가 쌓일수록 집행 실익 분석 정확도를 높입니다.”
+
+## 🤖 AI 확장 계획
+
+본 서비스는 데이터 기반 의사결정을 목표로 하며,
+AI 모델 적용을 위한 실험은 아래 저장소에서 별도로 진행하고 있습니다.
+
+👉 https://github.com/gun8217/AI
