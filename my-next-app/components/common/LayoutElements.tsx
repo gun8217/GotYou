@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
 // 공통 속성 인터페이스
 interface BaseProps {
@@ -54,7 +55,14 @@ export function Flex({
   return (
     <div
       style={style}
-      className={`flex ${direction === "col" ? "flex-col" : "flex-row"} ${justifyStyles[justify]} ${alignStyles[align]} ${gapStyles[gap]} ${className}`}
+      className={twMerge(
+        "flex",
+        direction === "col" ? "flex-col" : "flex-row",
+        justifyStyles[justify],
+        alignStyles[align],
+        gapStyles[gap],
+        className,
+      )}
     >
       {children}
     </div>
@@ -82,7 +90,11 @@ export function Box({
   return (
     <div
       style={style}
-      className={`bg-white rounded border border-slate-200 shadow-sm ${paddings[padding]} ${className}`}
+      className={twMerge(
+        "bg-white rounded border border-slate-200 shadow-sm",
+        paddings[padding],
+        className,
+      )}
     >
       {children}
     </div>
@@ -109,11 +121,13 @@ export function Button({
     "inline-flex items-center justify-center font-bold transition-all active:scale-[0.98] disabled:opacity-30 disabled:pointer-events-none rounded";
 
   const variants: Record<string, string> = {
-    primary: "bg-blue-600 text-white shadow-sm hover:bg-blue-700",
-    secondary: "bg-slate-800 text-white shadow-sm hover:bg-slate-900",
+    primary:
+      "bg-blue-600 text-white shadow-sm hover:bg-blue-700 hover:text-white",
+    secondary:
+      "bg-slate-800 text-white shadow-sm hover:bg-slate-900 hover:text-white",
     outline:
       "border border-slate-300 bg-white text-slate-600 hover:bg-slate-50",
-    danger: "bg-red-500 text-white shadow-sm hover:bg-red-600",
+    danger: "bg-red-500 text-white shadow-sm hover:bg-red-600 hover:text-white",
     ghost: "text-slate-500 hover:bg-slate-100 hover:text-slate-900",
   };
 
@@ -126,7 +140,7 @@ export function Button({
   return (
     <button
       style={style}
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+      className={twMerge(baseStyles, variants[variant], sizes[size], className)}
       disabled={loading}
       {...props}
     >

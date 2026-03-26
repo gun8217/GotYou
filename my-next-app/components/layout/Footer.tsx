@@ -101,7 +101,7 @@ export default function Footer() {
                 CS CENTER
               </h4>
               <p className="text-2xl font-black text-blue-400 mb-1">
-                1544-XXXX
+                XXX-XXXX-XXXX
               </p>
               <p className="text-[10px] text-slate-500 font-semibold mb-4">
                 평일 10:00 - 18:00 (주말/공휴일 휴무)
@@ -113,7 +113,7 @@ export default function Footer() {
               >
                 <Mail size={14} className="text-slate-500" />
                 <span className="text-[11px] text-slate-300 font-bold">
-                  help@gotyounom.com
+                  help@gotyou.com
                 </span>
               </Flex>
             </Box>
