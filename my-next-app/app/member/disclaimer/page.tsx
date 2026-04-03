@@ -1,5 +1,6 @@
 "use client";
 
+import { SectionTitle } from "@/components/common/Heading";
 import { clsx, type ClassValue } from "clsx";
 import { AlertTriangle, Info, LucideIcon, Scale } from "lucide-react";
 import React from "react";
@@ -28,9 +29,7 @@ const DisclaimerSection = ({
 }: DisclaimerSectionProps) => (
   <section
     className={cn(
-      "p-6 border transition-all",
-      // 크게 적용하는 기준인 8px(rounded-lg) 적용
-      "rounded-lg",
+      "p-6 border rounded-lg transition-all",
       important
         ? "bg-orange-50 border-orange-100"
         : "bg-slate-50 border-slate-100",
@@ -43,15 +42,17 @@ const DisclaimerSection = ({
           important ? "text-orange-600" : "text-slate-900",
         )}
       />
-      <h2
+
+      <SectionTitle
         className={cn(
-          "text-base font-bold",
+          "text-base",
           important ? "text-orange-900" : "text-slate-900",
         )}
       >
         {title}
-      </h2>
+      </SectionTitle>
     </div>
+
     <div className="text-sm text-slate-600 leading-relaxed ml-8">
       {children}
     </div>
@@ -69,7 +70,7 @@ export function DisclaimerContent() {
       >
         <p>
           본 플랫폼은{" "}
-          <span className="font-bold underline text-orange-700">
+          <span className="font-black underline text-orange-700">
             변호사법 및 관련 법령을 준수
           </span>
           합니다. 제공되는 모든 정보는 데이터 기반의 가이드라인일 뿐이며, 특정
@@ -81,7 +82,7 @@ export function DisclaimerContent() {
       <DisclaimerSection icon={Scale} title="의사결정 보조 서비스의 한계">
         <p>
           본 서비스는 판결 이후 강제집행 절차에 대한 정보를 구조화하여 제공하는
-          <span className="font-bold text-slate-900">
+          <span className="font-black text-slate-900">
             {" "}
             &quot;판단 보조 도구&quot;{" "}
           </span>
@@ -108,7 +109,7 @@ export function DisclaimerContent() {
         </p>
       </DisclaimerSection>
 
-      {/* 동의 안내 바 - 8px(rounded-lg) 적용 */}
+      {/* 동의 안내 바 */}
       <div className="mt-8 p-4 bg-slate-900 rounded-lg text-white text-xs text-center font-medium">
         이용자는 위 내용을 충분히 숙지하였으며, 이에 동의하고 서비스를
         이용합니다.

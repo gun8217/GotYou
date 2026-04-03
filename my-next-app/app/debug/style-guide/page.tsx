@@ -1,9 +1,6 @@
 "use client";
 
 import BaseModal from "@/components/common/BaseModal";
-import { Button } from "@/components/common/Button";
-import { Card } from "@/components/common/Card";
-import { Flex } from "@/components/common/Flex";
 import {
   Checkbox,
   FileInput,
@@ -12,7 +9,17 @@ import {
   Select,
 } from "@/components/common/FormElements";
 import { SectionTitle } from "@/components/common/Heading";
-import { Table, TBody, TD, TH, THead, TR } from "@/components/common/Table";
+import {
+  Box,
+  Button,
+  Flex,
+  Table,
+  TBody,
+  TD,
+  TH,
+  THead,
+  TR,
+} from "@/components/common/LayoutElements";
 import { useState } from "react";
 
 export default function StyleGuidePage() {
@@ -21,6 +28,7 @@ export default function StyleGuidePage() {
   return (
     <div className="min-h-screen bg-slate-50 p-10 pb-40 font-sans">
       <div className="max-w-4xl mx-auto space-y-12">
+        {/* 헤더 */}
         <header className="border-b border-slate-200 pb-6">
           <h1 className="text-4xl font-black text-slate-900 tracking-tight">
             UI Style Guide
@@ -93,7 +101,8 @@ export default function StyleGuidePage() {
           </div>
         </section>
 
-        <Card padding="md" className="max-w-2xl mx-auto mt-10">
+        {/* 4. Box + Table */}
+        <Box padding="md" className="max-w-2xl mx-auto mt-10">
           <Flex justify="between" align="center" className="mb-8">
             <div className="space-y-1">
               <SectionTitle>최근 사건 목록</SectionTitle>
@@ -144,9 +153,10 @@ export default function StyleGuidePage() {
             <Button variant="ghost">취소</Button>
             <Button variant="primary">새 사건 등록</Button>
           </Flex>
-        </Card>
+        </Box>
       </div>
 
+      {/* BaseModal */}
       <BaseModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}

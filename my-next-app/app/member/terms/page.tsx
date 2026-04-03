@@ -1,5 +1,6 @@
 "use client";
 
+import { SectionTitle } from "@/components/common/Heading";
 import { clsx, type ClassValue } from "clsx";
 import React from "react";
 import { twMerge } from "tailwind-merge";
@@ -20,7 +21,7 @@ const TermSection = ({
   children: React.ReactNode;
 }) => (
   <section className="space-y-2.5">
-    <h2 className="text-lg font-bold text-slate-900 leading-tight">{title}</h2>
+    <SectionTitle className="text-lg">{title}</SectionTitle>
     <div className="text-slate-600 leading-relaxed">{children}</div>
   </section>
 );

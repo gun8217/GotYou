@@ -1,39 +1,45 @@
 "use client";
 
-import { Flex } from "@/components/common/LayoutElements";
-import { Check, ChevronRight } from "lucide-react";
+import { Check } from "lucide-react";
 
 interface AgreementItemProps {
   label: string;
   checked: boolean;
-  onToggle: () => void;
+  onCheck: (value: boolean) => void;
+  onView: () => void;
 }
 
 export default function AgreementItem({
   label,
   checked,
-  onToggle,
+  onCheck,
+  onView,
 }: AgreementItemProps) {
   return (
-    <div
-      onClick={onToggle}
-      className="flex items-center justify-between group p-2 cursor-pointer transition-colors hover:bg-slate-50 border border-transparent hover:border-slate-100"
-    >
-      <Flex gap={3} className="pointer-events-none">
+    <div className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50">
+      <button
+        type="button"
+        onClick={() => onCheck(!checked)}
+        className="flex items-center gap-3"
+      >
         <div
-          className={`w-4 h-4 flex items-center justify-center border transition-all ${checked ? "bg-blue-600 border-blue-600" : "border-slate-300 bg-white"}`}
+          className={`w-5 h-5 flex items-center justify-center rounded-md border ${
+            checked ? "bg-blue-600 border-blue-600" : "border-slate-300"
+          }`}
         >
-          {checked && <Check className="h-2.5 w-2.5 text-white stroke-[4px]" />}
+          {checked && <Check className="h-3 w-3 text-white stroke-[3px]" />}
         </div>
-        <span
-          className={`text-[13px] font-medium transition-colors ${checked ? "text-slate-900" : "text-slate-400"}`}
-        >
-          {label}
-        </span>
-      </Flex>
-      <div className="flex items-center gap-1 text-[10px] font-bold text-slate-300 group-hover:text-blue-500 transition-colors uppercase tracking-tighter">
-        View <ChevronRight className="h-3 w-3" />
-      </div>
+
+        <span className="text-sm font-medium text-slate-900">{label}</span>
+      </button>
+
+      <button
+        type="button"
+        onClick={onView}
+        className="text-xs font-bold text-blue-600"
+      >
+        보기
+      </button>
     </div>
   );
 }
