@@ -1,21 +1,20 @@
 @import "tailwindcss";
 
+/* 1. 기본 테마 변수 설정 */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-brand-blue-50: #f0f1ff;
-  --color-brand-blue-100: #e4e6ff;
-  --color-brand-blue-500: #3d49f0;
-  --color-brand-blue-600: #2d34d6;
-  --color-brand-blue-700: #2314a3; /* ★ 집행나침반 시그니처 컬러 */
-  --color-brand-blue-900: #1d176b;
+  /* 브랜드 컬러 */
+  --brand-blue: #3994cd;
+  --brand-green: #01854b;
+  --brand-light-green: #8ec63f;
+  --brand-lime: #bed82f;
+
+  /* [추가] 폰트가 로드되지 않았을 때를 대비한 기본 폰트 스택 정의 */
+  --font-fallback:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,12 +24,38 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* 2. Tailwind v4 테마 확장 */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* [수정] font-sans의 우선순위를 강제함 */
+  --font-sans: var(--font-noto-sans-kr), var(--font-fallback);
+  --font-mono: var(--font-geist-mono), ui-mono, monospace;
+
+  /* 브랜드 컬러 등록 */
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-green: var(--brand-green);
+  --color-brand-light-green: var(--brand-light-green);
+  --color-brand-lime: var(--brand-lime);
+
+  --color-brand-blue-600: #2d7fb3;
+  --color-brand-green-700: #006b3d;
 }
 
-button {
-  cursor: pointer;
+/* 3. 기본 요소 스타일링 */
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+
+    font-family: var(--font-noto-sans-kr), var(--font-fallback);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button {
+    cursor: pointer;
+  }
 }
