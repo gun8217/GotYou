@@ -102,7 +102,9 @@ export default function HeroSection() {
         </p>
 
         <div className={`animate__animated animate__fadeInUp`}>
-          <Button className={styles.mainBtn}>서비스 둘러보기</Button>
+          <Button size="xl" className={styles.mainBtn}>
+            서비스 둘러보기
+          </Button>
         </div>
       </div>
     </section>

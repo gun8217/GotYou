@@ -18,7 +18,7 @@ export function ModalTitle({ children, className = "" }: HeadingProps) {
 export function SectionTitle({ children, className = "" }: HeadingProps) {
   return (
     <h4
-      className={`text-xl font-black text-slate-900 tracking-tight ${className}`}
+      className={`text-md font-black text-slate-900 tracking-tight ${className}`}
     >
       {children}
     </h4>

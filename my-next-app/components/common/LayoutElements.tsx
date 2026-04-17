@@ -108,8 +108,14 @@ export function Box({
 
 // --- 3. Button 컴포넌트 ---
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "outline" | "danger" | "ghost";
-  size?: "sm" | "md" | "lg";
+  variant?:
+    | "darkBlue"
+    | "primary"
+    | "secondary"
+    | "outline"
+    | "danger"
+    | "ghost";
+  size?: "sm" | "md" | "lg" | "xl";
   loading?: boolean;
 }
 
@@ -126,7 +132,9 @@ export function Button({
     "inline-flex items-center justify-center font-bold transition-all active:scale-[0.98] disabled:opacity-30 disabled:pointer-events-none rounded whitespace-nowrap";
 
   const variants: Record<string, string> = {
-    primary: "bg-brand-blue-700 text-white shadow-sm hover:bg-brand-blue-900",
+    darkBlue:
+      "bg-brand-dark-blue text-white shadow-sm hover:bg-brand-dark-blue",
+    primary: "bg-brand-blue text-white shadow-sm hover:bg-brand-blue-600",
     secondary: "bg-slate-800 text-white shadow-sm hover:bg-slate-900",
     outline:
       "border border-slate-300 bg-white text-slate-600 hover:bg-slate-50",
@@ -138,6 +146,7 @@ export function Button({
     sm: "px-3 h-8 sm:h-9 text-xs",
     md: "px-4 h-10 sm:h-11 text-sm",
     lg: "px-6 h-12 text-base",
+    xl: "px-10 h-16 text-xl",
   };
 
   return (
@@ -167,9 +176,9 @@ export function Badge({
   style,
 }: BadgeProps) {
   const styles: Record<string, string> = {
-    blue: "bg-brand-blue-50 text-brand-blue-700 border-brand-blue-100",
+    blue: "bg-brand-blue/10 text-brand-blue border-brand-blue/20",
     red: "bg-red-50 text-red-700 border-red-100",
-    green: "bg-green-50 text-green-700 border-green-100",
+    green: "bg-brand-green/10 text-brand-green border-brand-green/20",
     slate: "bg-slate-100 text-slate-600 border-slate-200",
     orange: "bg-orange-50 text-orange-700 border-orange-100",
   };
@@ -201,13 +210,13 @@ export function Progress({
   style,
 }: ProgressProps) {
   const barColors: Record<string, string> = {
-    blue: "bg-brand-blue-700",
+    blue: "bg-brand-blue",
     red: "bg-red-500",
     slate: "bg-slate-300",
   };
 
   const textColors: Record<string, string> = {
-    blue: "text-brand-blue-700",
+    blue: "text-brand-blue",
     red: "text-red-500",
     slate: "text-slate-400",
   };
@@ -277,17 +286,14 @@ export function TBody({ children, className = "", style }: BaseProps) {
   );
 }
 
+// TR 수정: 기본 속성 상속
 export function TR({
   children,
   onClick,
   className = "",
   style,
-}: {
-  children: React.ReactNode;
-  onClick?: () => void;
-  className?: string;
-  style?: React.CSSProperties;
-}) {
+  ...props
+}: React.HTMLAttributes<HTMLTableRowElement>) {
   return (
     <tr
       onClick={onClick}
@@ -297,25 +303,43 @@ export function TR({
         "transition-colors",
         className,
       )}
+      {...props}
     >
       {children}
     </tr>
   );
 }
 
-export function TH({ children, className = "", style }: BaseProps) {
+// TH 수정: th 속성(colSpan 등) 상속
+export function TH({
+  children,
+  className = "",
+  style,
+  ...props
+}: React.ThHTMLAttributes<HTMLTableCellElement>) {
   return (
-    <th style={style} className={cn("px-4 py-3 font-bold", className)}>
+    <th
+      style={style}
+      className={cn("px-4 py-2 text-slate-600 font-bold", className)}
+      {...props}
+    >
       {children}
     </th>
   );
 }
 
-export function TD({ children, className = "", style }: BaseProps) {
+// TD 수정: td 속성(colSpan 등) 상속
+export function TD({
+  children,
+  className = "",
+  style,
+  ...props
+}: React.TdHTMLAttributes<HTMLTableCellElement>) {
   return (
     <td
       style={style}
       className={cn("px-4 py-3 font-medium text-slate-600", className)}
+      {...props}
     >
       {children}
     </td>

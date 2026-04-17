@@ -1,11 +1,9 @@
 "use client";
 
-import { supabase } from "@/lib/supabaseClient";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { login } from "./actions";
 
-// ✅ 공통 컴포넌트 import
 import { Checkbox, Input } from "@/components/common/FormElements";
 import { Button } from "@/components/common/LayoutElements";
 
@@ -27,37 +25,41 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const router = useRouter();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setErrorMessage("");
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
 
-    if (error) {
-      setErrorMessage("이메일 또는 비밀번호가 올바르지 않습니다.");
+    const result = await login(formData);
+
+    // 실패 처리
+    if (!result.success) {
+      setErrorMessage(result.error);
       setLoading(false);
-    } else {
-      if (rememberMe) {
-        localStorage.setItem("savedEmail", email);
-      } else {
-        localStorage.removeItem("savedEmail");
-      }
-
-      router.push("/");
-      router.refresh();
+      return;
     }
+
+    // 성공 처리
+    if (rememberMe) {
+      localStorage.setItem("savedEmail", email);
+    } else {
+      localStorage.removeItem("savedEmail");
+    }
+
+    setLoading(false);
+
+    // 로그인 후 이동
+    window.location.href = "/";
   };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-12">
       <div className="w-full max-w-md space-y-8 rounded-[32px] bg-white p-8 shadow-sm border border-slate-100">
-        {/* 헤더 */}
         <div className="space-y-2 text-center">
           <h2 className="text-2xl font-black text-slate-900">로그인</h2>
           <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">
@@ -65,23 +67,26 @@ export default function Login() {
           </p>
         </div>
 
-        {/* 폼 */}
         <form className="space-y-6" onSubmit={handleLogin}>
           <div className="space-y-4">
             <Input
               label="이메일"
+              name="email"
               type="email"
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
 
             <Input
               label="비밀번호"
+              name="password"
               type="password"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
 
             <Checkbox
@@ -91,14 +96,12 @@ export default function Login() {
             />
           </div>
 
-          {/* 에러 */}
           {errorMessage && (
             <div className="bg-red-50 text-red-600 text-sm p-3 rounded-xl text-center font-bold">
               {errorMessage}
             </div>
           )}
 
-          {/* 버튼 */}
           <Button
             type="submit"
             variant="primary"
@@ -109,7 +112,6 @@ export default function Login() {
           </Button>
         </form>
 
-        {/* 하단 */}
         <div className="flex items-center justify-between text-sm">
           <div className="text-slate-400 font-medium">계정이 없으신가요?</div>
           <Link

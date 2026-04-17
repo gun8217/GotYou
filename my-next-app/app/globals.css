@@ -6,6 +6,7 @@
   --foreground: #171717;
 
   /* 브랜드 컬러 */
+  --brand-dark-blue: rgb(12, 74, 110);
   --brand-blue: #3994cd;
   --brand-green: #01854b;
   --brand-light-green: #8ec63f;
@@ -15,6 +16,10 @@
   --font-fallback:
     ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* screen height */
+  --header-height: 64px;
+  --footer-height: 455px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,6 +39,7 @@
   --font-mono: var(--font-geist-mono), ui-mono, monospace;
 
   /* 브랜드 컬러 등록 */
+  --color-brand-dark-blue: var(--brand-dark-blue);
   --color-brand-blue: var(--brand-blue);
   --color-brand-green: var(--brand-green);
   --color-brand-light-green: var(--brand-light-green);
@@ -58,4 +64,8 @@
   button {
     cursor: pointer;
   }
+}
+
+.min-h-screen {
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
 }

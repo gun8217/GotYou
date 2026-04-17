@@ -73,8 +73,10 @@ export function DisclaimerContent() {
           <span className="font-black underline text-orange-700">
             변호사법 및 관련 법령을 준수
           </span>
-          합니다. 제공되는 모든 정보는 데이터 기반의 가이드라인일 뿐이며, 특정
-          사건에 대한 법률적 판단이나 개별 수임 행위를 수행하지 않습니다.
+          합니다.
+          <br />
+          제공되는 모든 정보는 데이터 기반의 가이드라인일 뿐이며, 특정 사건에
+          대한 법률적 판단이나 개별 수임 행위를 수행하지 않습니다.
         </p>
       </DisclaimerSection>
 
@@ -86,8 +88,10 @@ export function DisclaimerContent() {
             {" "}
             &quot;판단 보조 도구&quot;{" "}
           </span>
-          입니다. 이용자가 서비스를 통해 내린 모든 결정과 그에 따른 결과에 대한
-          최종 책임은 이용자 본인에게 있습니다.
+          입니다.
+          <br />
+          이용자가 서비스를 통해 내린 모든 결정과 그에 따른 결과에 대한 최종
+          책임은 이용자 본인에게 있습니다.
         </p>
       </DisclaimerSection>
 
@@ -95,8 +99,10 @@ export function DisclaimerContent() {
       <DisclaimerSection icon={Info} title="데이터 및 AI 결과의 정확성">
         <p>
           분석 리포트와 예측 데이터는 과거 집행 사례와 AI 모델을 기반으로
-          합니다. 실제 집행 과정은 법원이나 채무자의 상황에 따라 결과가 다를 수
-          있으며, 성공을 보장하지 않습니다.
+          합니다.
+          <br />
+          실제 집행 과정은 법원이나 채무자의 상황에 따라 결과가 다를 수 있으며,
+          성공을 보장하지 않습니다.
         </p>
       </DisclaimerSection>
 

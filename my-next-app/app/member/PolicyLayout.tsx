@@ -1,8 +1,7 @@
 "use client";
 
 import { clsx, type ClassValue } from "clsx";
-import { ArrowLeft, ChevronDown } from "lucide-react";
-import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -38,7 +37,7 @@ export default function PolicyLayout({
     <div className="min-h-screen bg-slate-50 py-12 px-6 font-sans">
       <div
         className={cn(
-          "max-w-3xl mx-auto bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden text-slate-700",
+          "container max-w-7xl mx-auto bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden text-slate-700",
           className,
         )}
         style={style}
@@ -81,12 +80,6 @@ export default function PolicyLayout({
               부칙: 본 안내는 {effectiveDate}부터 적용됩니다.
             </p>
           )}
-          <Link
-            href="/member/signup"
-            className="inline-flex items-center gap-2 text-blue-600 font-bold hover:underline py-2 px-4 rounded transition-colors hover:bg-blue-50"
-          >
-            <ArrowLeft className="w-4 h-4" /> 가입 화면으로 돌아가기
-          </Link>
         </footer>
       </div>
     </div>
